@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("FTP Alarm")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("FTP Alarm")>
-<Assembly: AssemblyCopyright("Copyright ©  2018")>
+<Assembly: AssemblyTitle("Devil7 - FTP Alarm")>
+<Assembly: AssemblyDescription("Simple program to moniter an FTP server and alert when new file/folder created.")>
+<Assembly: AssemblyCompany("Devil7 Softwares")>
+<Assembly: AssemblyProduct("Devil7 - FTP Alarm")>
+<Assembly: AssemblyCopyright("Copyright © Devil7 Softwares 2018")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
