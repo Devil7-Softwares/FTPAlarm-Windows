@@ -81,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Classes\Encryption.vb" />
+    <Compile Include="Classes\Settings.vb" />
+    <Compile Include="Classes\SettingsManager.vb" />
     <Compile Include="frm_Main.vb">
       <SubType>Form</SubType>
     </Compile>
