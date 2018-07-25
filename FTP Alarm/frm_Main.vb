@@ -43,6 +43,10 @@ Public Class frm_Main
 
         Me.txt_RingTone.EditValue = SettingsManager.Settings.Ringtone
 
+        Me.txt_Hour.Value = SettingsManager.Settings.IntervalHour
+        Me.txt_Minutes.Value = SettingsManager.Settings.IntervalMinutes
+        Me.cb_IncludeFiles.Checked = SettingsManager.Settings.IncludeFiles
+
     End Sub
 
 #End Region
@@ -91,6 +95,22 @@ Public Class frm_Main
 
     Private Sub txt_RingTone_EditValueChanged(sender As Object, e As EventArgs) Handles txt_RingTone.EditValueChanged
         SettingsManager.Settings.Ringtone = txt_RingTone.EditValue
+    End Sub
+
+    Private Sub txt_Hour_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Hour.EditValueChanged
+        SettingsManager.Settings.IntervalHour = txt_Hour.Value
+    End Sub
+
+    Private Sub txt_Minutes_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Minutes.EditValueChanged
+        SettingsManager.Settings.IntervalMinutes = txt_Minutes.Value
+    End Sub
+
+    Private Sub txt_MaxDepth_EditValueChanged(sender As Object, e As EventArgs) Handles txt_MaxDepth.EditValueChanged
+        SettingsManager.Settings.MaxDepth = txt_MaxDepth.Value
+    End Sub
+
+    Private Sub cb_IncludeFiles_CheckedChanged(sender As Object, e As EventArgs) Handles cb_IncludeFiles.CheckedChanged
+        SettingsManager.Settings.IncludeFiles = cb_IncludeFiles.Checked
     End Sub
 
 #End Region
