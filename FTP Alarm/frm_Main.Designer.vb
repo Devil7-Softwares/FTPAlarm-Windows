@@ -56,6 +56,7 @@ Partial Class frm_Main
         Me.txt_Hour = New DevExpress.XtraEditors.SpinEdit()
         Me.lbl_Hour = New DevExpress.XtraEditors.LabelControl()
         Me.btn_StopAlarm = New DevExpress.XtraEditors.SimpleButton()
+        Me.btn_SetAlarm = New DevExpress.XtraEditors.SimpleButton()
         Me.grp_Status = New DevExpress.XtraEditors.GroupControl()
         Me.txt_CurrentCount = New DevExpress.XtraEditors.LabelControl()
         Me.txt_PreviousCount = New DevExpress.XtraEditors.LabelControl()
@@ -105,7 +106,6 @@ Partial Class frm_Main
         Me.txt_FTPServer = New DevExpress.XtraEditors.TextEdit()
         Me.txt_Port = New DevExpress.XtraEditors.TextEdit()
         Me.tp_About = New DevExpress.XtraBars.Navigation.TabNavigationPage()
-        Me.btn_SetAlarm = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.MainPane, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPane.SuspendLayout()
         Me.tp_Alarm.SuspendLayout()
@@ -276,6 +276,17 @@ Partial Class frm_Main
         Me.btn_StopAlarm.Size = New System.Drawing.Size(68, 63)
         Me.btn_StopAlarm.TabIndex = 3
         Me.btn_StopAlarm.Text = "Stop Alarm"
+        '
+        'btn_SetAlarm
+        '
+        Me.btn_SetAlarm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_SetAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.alarm
+        Me.btn_SetAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
+        Me.btn_SetAlarm.Location = New System.Drawing.Point(299, 17)
+        Me.btn_SetAlarm.Name = "btn_SetAlarm"
+        Me.btn_SetAlarm.Size = New System.Drawing.Size(68, 63)
+        Me.btn_SetAlarm.TabIndex = 3
+        Me.btn_SetAlarm.Text = "Set Alarm"
         '
         'grp_Status
         '
@@ -758,17 +769,6 @@ Partial Class frm_Main
         Me.tp_About.Caption = "About"
         Me.tp_About.Name = "tp_About"
         Me.tp_About.Size = New System.Drawing.Size(451, 298)
-        '
-        'btn_SetAlarm
-        '
-        Me.btn_SetAlarm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_SetAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.alarm
-        Me.btn_SetAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
-        Me.btn_SetAlarm.Location = New System.Drawing.Point(299, 17)
-        Me.btn_SetAlarm.Name = "btn_SetAlarm"
-        Me.btn_SetAlarm.Size = New System.Drawing.Size(68, 63)
-        Me.btn_SetAlarm.TabIndex = 3
-        Me.btn_SetAlarm.Text = "Set Alarm"
         '
         'frm_Main
         '

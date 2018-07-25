@@ -47,10 +47,60 @@ Public Class frm_Main
 
 #End Region
 
+#Region "Events - Settings"
+
+    Private Sub txt_FTPServer_EditValueChanged(sender As Object, e As EventArgs) Handles txt_FTPServer.EditValueChanged
+        SettingsManager.Settings.ServerAddress = txt_FTPServer.EditValue
+    End Sub
+
+    Private Sub txt_Port_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Port.EditValueChanged
+        SettingsManager.Settings.Port = txt_Port.EditValue
+    End Sub
+
+    Private Sub txt_Username_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Username.EditValueChanged
+        SettingsManager.Settings.Username = txt_Username.EditValue
+    End Sub
+
+    Private Sub txt_Password_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Password.EditValueChanged
+        SettingsManager.Settings.Password = txt_Password.EditValue
+    End Sub
+
+    Private Sub toggle_Ringtone_Toggled(sender As Object, e As EventArgs) Handles toggle_Ringtone.Toggled
+        SettingsManager.Settings.RingtoneNotification = toggle_Ringtone.IsOn
+    End Sub
+
+    Private Sub toggle_Voice_Toggled(sender As Object, e As EventArgs) Handles toggle_Voice.Toggled
+        SettingsManager.Settings.VoiceNotification = toggle_Voice.IsOn
+    End Sub
+
+    Private Sub toggle_Email_Toggled(sender As Object, e As EventArgs) Handles toggle_Email.Toggled
+        SettingsManager.Settings.EmailNotification = toggle_Email.IsOn
+    End Sub
+
+    Private Sub txt_From_EditValueChanged(sender As Object, e As EventArgs) Handles txt_From.EditValueChanged
+        SettingsManager.Settings.EmailFromAddress = txt_From.EditValue
+    End Sub
+
+    Private Sub txt_To_EditValueChanged(sender As Object, e As EventArgs) Handles txt_To.EditValueChanged
+        SettingsManager.Settings.EmailToAddresses = txt_To.EditValue
+    End Sub
+
+    Private Sub cmb_Voice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_Voice.SelectedIndexChanged
+        SettingsManager.Settings.Voice = cmb_Voice.EditValue
+    End Sub
+
+    Private Sub txt_RingTone_EditValueChanged(sender As Object, e As EventArgs) Handles txt_RingTone.EditValueChanged
+        SettingsManager.Settings.Ringtone = txt_RingTone.EditValue
+    End Sub
+
+#End Region
+
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadSettings()
     End Sub
 
-
+    Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        SettingsManager.SaveSettings()
+    End Sub
 
 End Class
