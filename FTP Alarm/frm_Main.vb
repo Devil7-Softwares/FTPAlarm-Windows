@@ -21,4 +21,36 @@
 
 Public Class frm_Main
 
+#Region "Subs"
+
+    Sub LoadSettings()
+
+        SettingsManager.LoadSettings()
+
+        Me.txt_FTPServer.EditValue = SettingsManager.Settings.ServerAddress
+        Me.txt_Port.EditValue = SettingsManager.Settings.Port
+        Me.txt_Username.EditValue = SettingsManager.Settings.Username
+        Me.txt_Password.EditValue = SettingsManager.Settings.Password
+
+        Me.toggle_Email.IsOn = SettingsManager.Settings.EmailNotification
+        Me.toggle_Ringtone.IsOn = SettingsManager.Settings.RingtoneNotification
+        Me.toggle_Voice.IsOn = SettingsManager.Settings.VoiceNotification
+
+        Me.txt_From.EditValue = SettingsManager.Settings.EmailFromAddress
+        Me.txt_To.EditValue = SettingsManager.Settings.EmailToAddresses
+
+        Me.cmb_Voice.EditValue = SettingsManager.Settings.Voice
+
+        Me.txt_RingTone.EditValue = SettingsManager.Settings.Ringtone
+
+    End Sub
+
+#End Region
+
+    Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadSettings()
+    End Sub
+
+
+
 End Class
