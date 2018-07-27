@@ -56,7 +56,7 @@ Public Class frm_Main
         Me.txt_From.EditValue = SettingsManager.Settings.EmailFromAddress
         Me.txt_To.EditValue = SettingsManager.Settings.EmailToAddresses
 
-        Me.cmb_Voice.EditValue = SettingsManager.Settings.Voice
+        If SettingsManager.Settings.Voice <> "" Then Me.cmb_Voice.EditValue = SettingsManager.Settings.Voice
 
         Me.txt_RingTone.EditValue = SettingsManager.Settings.Ringtone
 
@@ -153,6 +153,7 @@ Public Class frm_Main
 
     Private Sub cmb_Voice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_Voice.SelectedIndexChanged
         SettingsManager.Settings.Voice = cmb_Voice.EditValue
+        Speech_Manager.Voice = cmb_Voice.EditValue
     End Sub
 
     Private Sub txt_RingTone_EditValueChanged(sender As Object, e As EventArgs) Handles txt_RingTone.EditValueChanged
@@ -185,6 +186,10 @@ Public Class frm_Main
 
     Private Sub btn_TestEmail_Click(sender As Object, e As EventArgs) Handles btn_TestEmail.Click
         TestEmail()
+    End Sub
+
+    Private Sub btn_TestVoice_Click(sender As Object, e As EventArgs) Handles btn_TestVoice.Click
+        Speech_Manager.Start("This is the testing sentence for test voice synthesise. And the test has completed")
     End Sub
 
 #End Region
@@ -327,6 +332,11 @@ Public Class frm_Main
 
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Licenser.LicenseKey = LicenseKeys.GetXceedFTPKey ' Well I Wish I Could Push the Key to Git. But I Can't... So Specify Your Own Key Here :p
+        Dim Voices As String() = Speech_Manager.GetVoices
+        If Voices.Count > 0 Then
+            cmb_Voice.Properties.Items.AddRange(Voices)
+            cmb_Voice.SelectedItem = Voices(0)
+        End If
         LoadSettings()
     End Sub
 

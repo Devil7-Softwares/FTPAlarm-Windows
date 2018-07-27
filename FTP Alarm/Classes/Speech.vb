@@ -79,8 +79,12 @@ Public Class Speech : Inherits Component
     End Function
 
     Sub Start(ByVal Command As String)
-        p_objSynth.SelectVoice(Voice)
-        p_objSynth.SpeakAsync(Command)
+        Try
+            p_objSynth.SelectVoice(Voice)
+            p_objSynth.SpeakAsync(Command)
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Sub StopAll()
