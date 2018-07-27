@@ -19,7 +19,11 @@
 '                                                                          '
 '=========================================================================='
 
+Imports Xceed.Ftp
+
 Public Class frm_Main
+
+    WithEvents FTP As FtpClient
 
 #Region "Subs"
 
@@ -46,6 +50,51 @@ Public Class frm_Main
         Me.txt_Hour.Value = SettingsManager.Settings.IntervalHour
         Me.txt_Minutes.Value = SettingsManager.Settings.IntervalMinutes
         Me.cb_IncludeFiles.Checked = SettingsManager.Settings.IncludeFiles
+
+    End Sub
+
+    Function GetList() As List(Of String)
+        Try
+            ftp.Connect(Encryption.Decrypt(SettingsManager.Settings.ServerAddress), SettingsManager.Settings.Port)
+
+            Dim Username As String = Encryption.Decrypt(SettingsManager.Settings.Username)
+            Dim Password As String = Encryption.Decrypt(SettingsManager.Settings.Password)
+            If Username <> "" AndAlso Password <> "" Then
+                ftp.Login(Username, Password)
+            Else
+                ftp.Login()
+            End If
+
+            Dim Files As New List(Of String)
+
+            List(ftp, "/", Files, 0, 1)
+
+            ftp.Disconnect()
+
+            Return Files
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    Sub List(ByVal FTPClient As FtpClient, ByVal Folder As String, ByRef Files As List(Of String), ByVal Depth As Integer, ByVal MaxDepth As Integer)
+
+        Depth += 1
+
+        FTPClient.ChangeCurrentFolder(Folder)
+
+        Dim List_ As FtpItemInfoList = FTPClient.GetFolderContents
+        For Each i As FtpItemInfo In List_
+            Select Case i.Type
+                Case FtpItemType.File
+                    If SettingsManager.Settings.IncludeFiles Then Files.Add(i.Name)
+                Case FtpItemType.Folder
+                    Files.Add(i.Name)
+                    If Depth <> MaxDepth Then
+                        List(FTPClient, Folder & "/" & i.Name, Files, Depth, MaxDepth)
+                    End If
+            End Select
+        Next
 
     End Sub
 
