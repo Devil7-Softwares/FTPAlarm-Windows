@@ -23,6 +23,14 @@ Imports Xceed.Ftp
 Imports Devil7.Automation.FTPAlarm.libZPlay
 Imports DevExpress.XtraEditors.Controls
 
+Imports Google.Apis.Auth.OAuth2
+Imports Google.Apis.Gmail.v1
+Imports Google.Apis.Gmail.v1.Data
+Imports Google.Apis.Services
+Imports System.IO
+Imports System.Threading
+Imports System.Net.Mail
+
 Public Class frm_Main
 
     WithEvents FTP As FtpClient
@@ -175,6 +183,10 @@ Public Class frm_Main
         End If
     End Sub
 
+    Private Sub btn_TestEmail_Click(sender As Object, e As EventArgs) Handles btn_TestEmail.Click
+        TestEmail()
+    End Sub
+
 #End Region
 
 #Region "Events - Alarm"
@@ -259,8 +271,57 @@ Public Class frm_Main
 #Region "Email"
 
     Sub EmailNotification()
-        'Will be Implemented Soon™
+
+        SendMail(SettingsManager.Settings.EmailFromAddress & "@gmail.com", "Devil7 - FTP Alarm", SettingsManager.Settings.EmailToAddresses, "FTP Email Alert", SettingsManager.Settings.MailMessage)
+
     End Sub
+
+    Sub TestEmail()
+
+        If SendMail(SettingsManager.Settings.EmailFromAddress & "@gmail.com", "Devil7 - FTP Alarm", SettingsManager.Settings.EmailToAddresses, "Email Alert - Test", "This is the email send from Devil7 - FTP Alarm for testing.") = True Then
+            MsgBox("Test mail successfully send. :-)", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Done...!")
+        Else
+            MsgBox("Test mail failed to sent. :-\", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error...!")
+        End If
+
+    End Sub
+
+    Sub GetToAddresses(ByVal EmailIds As String, ByRef mail As AE.Net.Mail.MailMessage)
+
+        If EmailIds.Contains(";") Then
+            Dim r As String = ""
+            Dim s As String() = Split(EmailIds, ";")
+            For Each i As String In s
+                mail.To.Add(New MailAddress(i))
+            Next
+        Else
+            mail.To.Add(New MailAddress(EmailIds))
+        End If
+
+    End Sub
+
+    Public Function SendMail(ByVal FromMail As String, ByVal FromName As String, ByVal ToAddressess As String, ByVal Subject As String, ByVal Body As String)
+
+        Try
+            Dim msg = New AE.Net.Mail.MailMessage() With {.Subject = Subject, .Body = Body, .From = New MailAddress(FromMail, FromName)}
+            GetToAddresses(ToAddressess, msg)
+            msg.ReplyTo.Add(msg.From)
+            Dim msgStr = New StringWriter()
+            msg.Save(msgStr)
+            Dim credential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(New ClientSecrets() With {.ClientId = LicenseKeys.GetGmailCredentials.ClientID, .ClientSecret = LicenseKeys.GetGmailCredentials.ClientSecret}, {GmailService.Scope.MailGoogleCom}, FromMail, CancellationToken.None).Result
+            Dim service As New GmailService(New BaseClientService.Initializer() With {.HttpClientInitializer = credential, .ApplicationName = "Devil7 - FTP Alarm"})
+            Dim result As Message = service.Users.Messages.Send(New Message() With {.Raw = Base64UrlEncode(msgStr.ToString())}, "me").Execute()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+
+    Private Function Base64UrlEncode(input As String) As String
+        Dim inputBytes = System.Text.Encoding.UTF8.GetBytes(input)
+        Return Convert.ToBase64String(inputBytes).Replace("+"c, "-"c).Replace("/"c, "_"c).Replace("=", "")
+    End Function
 
 #End Region
 
