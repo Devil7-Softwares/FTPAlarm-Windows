@@ -20,12 +20,14 @@
 '=========================================================================='
 
 Imports Xceed.Ftp
+Imports Devil7.Automation.FTPAlarm.libZPlay
 
 Public Class frm_Main
 
     WithEvents FTP As FtpClient
 
     Dim OldList As List(Of String)
+    Dim AudioPlayer As New ZPlay
 
 #Region "Subs"
 
@@ -201,6 +203,53 @@ Public Class frm_Main
     End Sub
 
     Sub TriggerAlarm()
+
+        Me.Show()
+        Me.BringToFront()
+        Me.Focus()
+
+        ' Email Notification
+        If SettingsManager.Settings.EmailNotification Then
+            Dim th1 As New Threading.Thread(AddressOf EmailNotification)
+            th1.Start()
+        End If
+
+        ' Voice Notification
+        If SettingsManager.Settings.VoiceNotification Then
+            Dim S As String = ""
+            For i As Integer = 1 To SettingsManager.Settings.VoiceMessageLoop
+                S &= SettingsManager.Settings.VoiceMessage & " "
+            Next
+            Speech_Manager.Start(S.Trim)
+            Do Until Speech_Manager.isSpeaking = False
+                Threading.Thread.Sleep(1000)
+            Loop
+        End If
+
+        ' Ringtone Notification
+        If SettingsManager.Settings.RingtoneNotification Then
+            Dim AudioFile As String = IO.Path.Combine(Application.StartupPath, txt_RingTone.Text)
+            If My.Computer.FileSystem.FileExists(AudioFile) Then
+                AudioPlayer.OpenFile(AudioFile, TStreamFormat.sfAutodetect)
+            Else
+                AudioPlayer.OpenFile(IO.Path.Combine(Application.StartupPath, "Ringtone.wav"), TStreamFormat.sfAutodetect)
+            End If
+            Do Until 1 = 0
+                Dim t As New TStreamStatus
+                AudioPlayer.GetStatus(t)
+                If t.fPlay = False Then
+                    AudioPlayer.StartPlayback()
+                End If
+            Loop
+        End If
+
+    End Sub
+
+#End Region
+
+#Region "Email"
+
+    Sub EmailNotification()
         'Will be Implemented Soon™
     End Sub
 

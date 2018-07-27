@@ -167,6 +167,9 @@
     <Content Include="libzplay.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Ringtone.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\alarm.ico" />
     <None Include="Resources\abort.ico" />
     <None Include="Resources\splash.jpg" />

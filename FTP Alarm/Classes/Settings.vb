@@ -38,5 +38,7 @@ Public Class Settings
     Property Ringtone As String = "Default"
     Property IncludeFiles As Boolean = False
     Property MaxDepth As Integer = 2
+    Property VoiceMessage As String = "Alert. A New file has been created. Alert. A New File has been created."
+    Property VoiceMessageLoop As Integer = 0
 
 End Class

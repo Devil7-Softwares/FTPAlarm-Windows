@@ -111,6 +111,7 @@ Partial Class frm_Main
         Me.About = New Devil7.Automation.FTPAlarm.About()
         Me.Timer_Tick = New System.Windows.Forms.Timer(Me.components)
         Me.Worker_Alarm = New System.ComponentModel.BackgroundWorker()
+        Me.Speech_Manager = New Devil7.Automation.FTPAlarm.Speech()
         CType(Me.MainPane, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPane.SuspendLayout()
         Me.tp_Alarm.SuspendLayout()
@@ -805,6 +806,12 @@ Partial Class frm_Main
         '
         Me.Worker_Alarm.WorkerSupportsCancellation = True
         '
+        'Speech_Manager
+        '
+        Me.Speech_Manager.Rate = 0
+        Me.Speech_Manager.Voice = Nothing
+        Me.Speech_Manager.Volume = 100
+        '
         'frm_Main
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -930,4 +937,5 @@ Partial Class frm_Main
     Friend WithEvents txt_Elapsed As TimeLabel
     Friend WithEvents Timer_Tick As Timer
     Friend WithEvents Worker_Alarm As System.ComponentModel.BackgroundWorker
+    Friend WithEvents Speech_Manager As Speech
 End Class
