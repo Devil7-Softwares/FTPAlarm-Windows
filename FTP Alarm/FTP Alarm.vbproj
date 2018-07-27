@@ -89,6 +89,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Classes\Encryption.vb" />
+    <Compile Include="Classes\LicenseKeys.vb" />
     <Compile Include="Classes\Settings.vb" />
     <Compile Include="Classes\SettingsManager.vb" />
     <Compile Include="Classes\TimeLabel.vb">

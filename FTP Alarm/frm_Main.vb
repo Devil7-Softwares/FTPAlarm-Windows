@@ -180,6 +180,7 @@ Public Class frm_Main
 #End Region
 
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Licenser.LicenseKey = LicenseKeys.GetXceedFTPKey ' Well I Wish I Could Push the Key to Git. But I Can't... So Specify Your Own Key Here :p
         LoadSettings()
     End Sub
 
