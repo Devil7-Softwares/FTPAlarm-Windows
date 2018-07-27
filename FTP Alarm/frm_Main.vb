@@ -21,6 +21,7 @@
 
 Imports Xceed.Ftp
 Imports Devil7.Automation.FTPAlarm.libZPlay
+Imports DevExpress.XtraEditors.Controls
 
 Public Class frm_Main
 
@@ -59,21 +60,21 @@ Public Class frm_Main
 
     Function GetList() As List(Of String)
         Try
-            ftp.Connect(Encryption.Decrypt(SettingsManager.Settings.ServerAddress), SettingsManager.Settings.Port)
+            FTP.Connect(Encryption.Decrypt(SettingsManager.Settings.ServerAddress), SettingsManager.Settings.Port)
 
             Dim Username As String = Encryption.Decrypt(SettingsManager.Settings.Username)
             Dim Password As String = Encryption.Decrypt(SettingsManager.Settings.Password)
             If Username <> "" AndAlso Password <> "" Then
-                ftp.Login(Username, Password)
+                FTP.Login(Username, Password)
             Else
-                ftp.Login()
+                FTP.Login()
             End If
 
             Dim Files As New List(Of String)
 
-            List(ftp, "/", Files, 0, 1)
+            List(FTP, "/", Files, 0, 1)
 
-            ftp.Disconnect()
+            FTP.Disconnect()
 
             Return Files
         Catch ex As Exception
@@ -164,6 +165,14 @@ Public Class frm_Main
 
     Private Sub cb_IncludeFiles_CheckedChanged(sender As Object, e As EventArgs) Handles cb_IncludeFiles.CheckedChanged
         SettingsManager.Settings.IncludeFiles = cb_IncludeFiles.Checked
+    End Sub
+
+    Private Sub txt_RingTone_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txt_RingTone.ButtonClick
+        If OpenAudio.ShowDialog = Windows.Forms.DialogResult.OK Then
+            Dim fi As New IO.FileInfo(OpenAudio.FileName)
+            lbl_Ringtone.Text = fi.Name
+            My.Computer.FileSystem.CopyFile(OpenAudio.FileName, IO.Path.Combine(Application.StartupPath, IO.Path.GetFileName(OpenAudio.FileName)))
+        End If
     End Sub
 
 #End Region
