@@ -27,6 +27,7 @@ Imports System.Security.Cryptography
 
 Public Class Encryption
 #Region "Encryption Keys & Settings"
+    Private Shared PassPhrase As String = "QS@14#%1S478"
     Private Shared m_strSaltValue As String = "G$M@RT@^"            '---- Should be minimum 8 characters
     Private Shared m_strInitVector As String = "@D$7@RL#$DKS$#@D"   '--- must be 16 bytes
 
@@ -35,7 +36,7 @@ Public Class Encryption
 #End Region
 #Region "EncryptDecryptClass"
     'Encrypt Function: 
-    Public Shared Function Encrypt(ByVal plainText As String, ByVal PassPhrase As String) As String
+    Public Shared Function Encrypt(ByVal plainText As String) As String
         Dim strReturn As String = String.Empty
         Try
             Dim initVectorBytes As Byte()
@@ -81,7 +82,7 @@ Public Class Encryption
     End Function
 
     'Decrypt Function: 
-    Public Shared Function Decrypt(ByVal cipherText As String, ByVal PassPhrase As String) As String
+    Public Shared Function Decrypt(ByVal cipherText As String) As String
         Dim strReturn As String = String.Empty
         Try
             Dim initVectorBytes As Byte()
