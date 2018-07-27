@@ -115,6 +115,21 @@ Public Class frm_Main
 
 #End Region
 
+#Region "Events - Alarm"
+
+    Private Sub Timer_Tick_Tick(sender As Object, e As EventArgs) Handles Timer_Tick.Tick
+        If txt_Elapsed.Value = (((txt_Hour.Value * 60) + txt_Minutes.Value) * 60) Then
+            txt_LastChecked.Text = Now.ToString("dd/MM/yyyy hh:mm:ss tt")
+            txt_Elapsed.Value = 0
+            Worker_Alarm.RunWorkerAsync()
+            Timer_Tick.Stop()
+        Else
+            txt_Elapsed.Value += 1
+        End If
+    End Sub
+
+#End Region
+
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadSettings()
     End Sub
@@ -122,5 +137,6 @@ Public Class frm_Main
     Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SettingsManager.SaveSettings()
     End Sub
+
 
 End Class

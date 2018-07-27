@@ -43,6 +43,7 @@ Partial Class frm_Main
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Main))
         Me.MainPane = New DevExpress.XtraBars.Navigation.TabPane()
         Me.tp_Alarm = New DevExpress.XtraBars.Navigation.TabNavigationPage()
@@ -55,7 +56,10 @@ Partial Class frm_Main
         Me.lbl_Minutes = New DevExpress.XtraEditors.LabelControl()
         Me.txt_Hour = New DevExpress.XtraEditors.SpinEdit()
         Me.lbl_Hour = New DevExpress.XtraEditors.LabelControl()
+        Me.btn_StopAlarm = New DevExpress.XtraEditors.SimpleButton()
+        Me.btn_SetAlarm = New DevExpress.XtraEditors.SimpleButton()
         Me.grp_Status = New DevExpress.XtraEditors.GroupControl()
+        Me.txt_Elapsed = New Devil7.Automation.FTPAlarm.TimeLabel()
         Me.txt_CurrentCount = New DevExpress.XtraEditors.LabelControl()
         Me.txt_PreviousCount = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_CurrentCount = New DevExpress.XtraEditors.LabelControl()
@@ -104,10 +108,9 @@ Partial Class frm_Main
         Me.txt_FTPServer = New DevExpress.XtraEditors.TextEdit()
         Me.txt_Port = New DevExpress.XtraEditors.TextEdit()
         Me.tp_About = New DevExpress.XtraBars.Navigation.TabNavigationPage()
-        Me.btn_StopAlarm = New DevExpress.XtraEditors.SimpleButton()
-        Me.btn_SetAlarm = New DevExpress.XtraEditors.SimpleButton()
         Me.About = New Devil7.Automation.FTPAlarm.About()
-        Me.txt_Elapsed = New Devil7.Automation.FTPAlarm.TimeLabel()
+        Me.Timer_Tick = New System.Windows.Forms.Timer(Me.components)
+        Me.Worker_Alarm = New System.ComponentModel.BackgroundWorker()
         CType(Me.MainPane, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPane.SuspendLayout()
         Me.tp_Alarm.SuspendLayout()
@@ -268,6 +271,29 @@ Partial Class frm_Main
         Me.lbl_Hour.TabIndex = 5
         Me.lbl_Hour.Text = "Hour"
         '
+        'btn_StopAlarm
+        '
+        Me.btn_StopAlarm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_StopAlarm.Enabled = False
+        Me.btn_StopAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.abort
+        Me.btn_StopAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
+        Me.btn_StopAlarm.Location = New System.Drawing.Point(373, 17)
+        Me.btn_StopAlarm.Name = "btn_StopAlarm"
+        Me.btn_StopAlarm.Size = New System.Drawing.Size(68, 63)
+        Me.btn_StopAlarm.TabIndex = 3
+        Me.btn_StopAlarm.Text = "Stop Alarm"
+        '
+        'btn_SetAlarm
+        '
+        Me.btn_SetAlarm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_SetAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.alarm
+        Me.btn_SetAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
+        Me.btn_SetAlarm.Location = New System.Drawing.Point(299, 17)
+        Me.btn_SetAlarm.Name = "btn_SetAlarm"
+        Me.btn_SetAlarm.Size = New System.Drawing.Size(68, 63)
+        Me.btn_SetAlarm.TabIndex = 3
+        Me.btn_SetAlarm.Text = "Set Alarm"
+        '
         'grp_Status
         '
         Me.grp_Status.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -284,6 +310,17 @@ Partial Class frm_Main
         Me.grp_Status.Size = New System.Drawing.Size(429, 72)
         Me.grp_Status.TabIndex = 2
         Me.grp_Status.Text = "Status"
+        '
+        'txt_Elapsed
+        '
+        Me.txt_Elapsed.AutoSize = True
+        Me.txt_Elapsed.Caption = "Interval (Elapsed)"
+        Me.txt_Elapsed.Location = New System.Drawing.Point(12, 27)
+        Me.txt_Elapsed.Name = "txt_Elapsed"
+        Me.txt_Elapsed.Size = New System.Drawing.Size(147, 13)
+        Me.txt_Elapsed.TabIndex = 8
+        Me.txt_Elapsed.Text = "Interval (Elapsed) : 00:00:00"
+        Me.txt_Elapsed.Value = CType(0, Long)
         '
         'txt_CurrentCount
         '
@@ -752,47 +789,21 @@ Partial Class frm_Main
         Me.tp_About.Name = "tp_About"
         Me.tp_About.Size = New System.Drawing.Size(451, 295)
         '
-        'btn_StopAlarm
-        '
-        Me.btn_StopAlarm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_StopAlarm.Enabled = False
-        Me.btn_StopAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.abort
-        Me.btn_StopAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
-        Me.btn_StopAlarm.Location = New System.Drawing.Point(373, 17)
-        Me.btn_StopAlarm.Name = "btn_StopAlarm"
-        Me.btn_StopAlarm.Size = New System.Drawing.Size(68, 63)
-        Me.btn_StopAlarm.TabIndex = 3
-        Me.btn_StopAlarm.Text = "Stop Alarm"
-        '
-        'btn_SetAlarm
-        '
-        Me.btn_SetAlarm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_SetAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.alarm
-        Me.btn_SetAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
-        Me.btn_SetAlarm.Location = New System.Drawing.Point(299, 17)
-        Me.btn_SetAlarm.Name = "btn_SetAlarm"
-        Me.btn_SetAlarm.Size = New System.Drawing.Size(68, 63)
-        Me.btn_SetAlarm.TabIndex = 3
-        Me.btn_SetAlarm.Text = "Set Alarm"
-        '
         'About
         '
         Me.About.Dock = System.Windows.Forms.DockStyle.Top
         Me.About.Location = New System.Drawing.Point(0, 0)
         Me.About.Name = "About"
-        Me.About.Size = New System.Drawing.Size(434, 483)
+        Me.About.Size = New System.Drawing.Size(451, 483)
         Me.About.TabIndex = 0
         '
-        'txt_Elapsed
+        'Timer_Tick
         '
-        Me.txt_Elapsed.AutoSize = True
-        Me.txt_Elapsed.Caption = "Interval (Elapsed)"
-        Me.txt_Elapsed.Location = New System.Drawing.Point(12, 27)
-        Me.txt_Elapsed.Name = "txt_Elapsed"
-        Me.txt_Elapsed.Size = New System.Drawing.Size(147, 13)
-        Me.txt_Elapsed.TabIndex = 8
-        Me.txt_Elapsed.Text = "Interval (Elapsed) : 00:00:00"
-        Me.txt_Elapsed.Value = CType(0, Long)
+        Me.Timer_Tick.Interval = 1000
+        '
+        'Worker_Alarm
+        '
+        Me.Worker_Alarm.WorkerSupportsCancellation = True
         '
         'frm_Main
         '
@@ -917,4 +928,6 @@ Partial Class frm_Main
     Friend WithEvents tp_About As DevExpress.XtraBars.Navigation.TabNavigationPage
     Friend WithEvents About As About
     Friend WithEvents txt_Elapsed As TimeLabel
+    Friend WithEvents Timer_Tick As Timer
+    Friend WithEvents Worker_Alarm As System.ComponentModel.BackgroundWorker
 End Class
