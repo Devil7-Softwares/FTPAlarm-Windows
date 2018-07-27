@@ -25,6 +25,8 @@ Public Class frm_Main
 
     WithEvents FTP As FtpClient
 
+    Dim OldList As List(Of String)
+
 #Region "Subs"
 
     Sub LoadSettings()
@@ -177,6 +179,31 @@ Public Class frm_Main
         End If
     End Sub
 
+    Private Sub Worker_Alarm_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_Alarm.DoWork
+
+        Dim NewList As List(Of String) = GetList()
+
+        If NewList IsNot Nothing Then
+            Me.Invoke(Sub()
+                          txt_CurrentCount.Text = NewList.Count
+                          txt_PreviousCount.Text = OldList.Count
+                      End Sub)
+            Dim C1 As IEnumerable(Of String) = NewList.Except(OldList)
+            Dim C2 As IEnumerable(Of String) = OldList.Except(NewList)
+            If C1.Count > 0 Or C2.Count > 0 Then
+                TriggerAlarm()
+            Else
+                OldList = NewList
+                Timer_Tick.Start()
+            End If
+        End If
+
+    End Sub
+
+    Sub TriggerAlarm()
+        'Will be Implemented Soon™
+    End Sub
+
 #End Region
 
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -187,6 +214,5 @@ Public Class frm_Main
     Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SettingsManager.SaveSettings()
     End Sub
-
 
 End Class
