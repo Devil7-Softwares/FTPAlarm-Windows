@@ -192,6 +192,19 @@ Public Class frm_Main
         Speech_Manager.Start("This is the testing sentence for test voice synthesise. And the test has completed")
     End Sub
 
+    Private Sub btn_ResetRingtone_Click(sender As Object, e As EventArgs) Handles btn_ResetRingtone.Click
+        txt_RingTone.Text = "Default"
+    End Sub
+
+    Private Sub btn_Play_Click(sender As Object, e As EventArgs) Handles btn_Play.Click
+        Dim AudioFile As String = IO.Path.Combine(Application.StartupPath, txt_RingTone.Text)
+        If My.Computer.FileSystem.FileExists(AudioFile) Then
+            My.Computer.Audio.Play(AudioFile, AudioPlayMode.WaitToComplete)
+        Else
+            My.Computer.Audio.Play(IO.Path.Combine(Application.StartupPath, "Ringtone.wav"), AudioPlayMode.WaitToComplete)
+        End If
+    End Sub
+
 #End Region
 
 #Region "Events - Alarm"
