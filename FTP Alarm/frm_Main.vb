@@ -36,7 +36,8 @@ Public Class frm_Main
     WithEvents FTP As FtpClient
 
     Dim OldList As List(Of String)
-    Dim AudioPlayer As New ZPlay
+    Dim AudioPlayer As ZPlay
+    Dim AlarmThread As Threading.Thread
 
 #Region "Subs"
 
@@ -44,10 +45,10 @@ Public Class frm_Main
 
         SettingsManager.LoadSettings()
 
-        Me.txt_FTPServer.EditValue = SettingsManager.Settings.ServerAddress
+        Me.txt_FTPServer.EditValue = Encryption.Decrypt(SettingsManager.Settings.ServerAddress)
         Me.txt_Port.EditValue = SettingsManager.Settings.Port
-        Me.txt_Username.EditValue = SettingsManager.Settings.Username
-        Me.txt_Password.EditValue = SettingsManager.Settings.Password
+        Me.txt_Username.EditValue = Encryption.Decrypt(SettingsManager.Settings.Username)
+        Me.txt_Password.EditValue = Encryption.Decrypt(SettingsManager.Settings.Password)
 
         Me.toggle_Email.IsOn = SettingsManager.Settings.EmailNotification
         Me.toggle_Ringtone.IsOn = SettingsManager.Settings.RingtoneNotification
@@ -111,12 +112,33 @@ Public Class frm_Main
 
     End Sub
 
+    Sub DisableControls()
+        txt_Hour.Enabled = False
+        txt_Minutes.Enabled = False
+        txt_MaxDepth.Enabled = False
+        cb_IncludeFiles.Enabled = False
+        btn_SetAlarm.Enabled = False
+        tp_Settings.Enabled = False
+        btn_StopAlarm.Enabled = True
+    End Sub
+
+    Sub EnableControls()
+        txt_Hour.Enabled = True
+        txt_Minutes.Enabled = True
+        txt_MaxDepth.Enabled = True
+        cb_IncludeFiles.Enabled = True
+        btn_SetAlarm.Enabled = True
+        tp_Settings.Enabled = True
+        tp_About.Enabled = True
+        btn_StopAlarm.Enabled = False
+    End Sub
+
 #End Region
 
 #Region "Events - Settings"
 
     Private Sub txt_FTPServer_EditValueChanged(sender As Object, e As EventArgs) Handles txt_FTPServer.EditValueChanged
-        SettingsManager.Settings.ServerAddress = txt_FTPServer.EditValue
+        SettingsManager.Settings.ServerAddress = Encryption.Encrypt(txt_FTPServer.EditValue)
     End Sub
 
     Private Sub txt_Port_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Port.EditValueChanged
@@ -124,11 +146,11 @@ Public Class frm_Main
     End Sub
 
     Private Sub txt_Username_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Username.EditValueChanged
-        SettingsManager.Settings.Username = txt_Username.EditValue
+        SettingsManager.Settings.Username = Encryption.Encrypt(txt_Username.EditValue)
     End Sub
 
     Private Sub txt_Password_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Password.EditValueChanged
-        SettingsManager.Settings.Password = txt_Password.EditValue
+        SettingsManager.Settings.Password = Encryption.Encrypt(txt_Password.EditValue)
     End Sub
 
     Private Sub toggle_Ringtone_Toggled(sender As Object, e As EventArgs) Handles toggle_Ringtone.Toggled
@@ -232,7 +254,9 @@ Public Class frm_Main
             Dim C1 As IEnumerable(Of String) = NewList.Except(OldList)
             Dim C2 As IEnumerable(Of String) = OldList.Except(NewList)
             If C1.Count > 0 Or C2.Count > 0 Then
-                TriggerAlarm()
+                AudioPlayer = New ZPlay
+                AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
+                AlarmThread.Start()
             Else
                 OldList = NewList
                 Timer_Tick.Start()
@@ -243,9 +267,11 @@ Public Class frm_Main
 
     Sub TriggerAlarm()
 
-        Me.Show()
-        Me.BringToFront()
-        Me.Focus()
+        Me.Invoke(Sub()
+                      Me.Show()
+                      Me.BringToFront()
+                      Me.Focus()
+                  End Sub)
 
         ' Email Notification
         If SettingsManager.Settings.EmailNotification Then
@@ -260,13 +286,14 @@ Public Class frm_Main
                 S &= SettingsManager.Settings.VoiceMessage & " "
             Next
             Speech_Manager.Start(S.Trim)
+            Threading.Thread.Sleep(2000)
             Do Until Speech_Manager.isSpeaking = False
                 Threading.Thread.Sleep(1000)
             Loop
         End If
 
         ' Ringtone Notification
-        If SettingsManager.Settings.RingtoneNotification Then
+        If SettingsManager.Settings.RingtoneNotification AndAlso AudioPlayer IsNot Nothing Then
             Dim AudioFile As String = IO.Path.Combine(Application.StartupPath, txt_RingTone.Text)
             If My.Computer.FileSystem.FileExists(AudioFile) Then
                 AudioPlayer.OpenFile(AudioFile, TStreamFormat.sfAutodetect)
@@ -282,6 +309,52 @@ Public Class frm_Main
             Loop
         End If
 
+    End Sub
+
+    Private Sub btn_SetAlarm_Click(sender As Object, e As EventArgs) Handles btn_SetAlarm.Click
+        Worker_SetAlarm.RunWorkerAsync()
+    End Sub
+
+    Private Sub btn_StopAlarm_Click(sender As Object, e As EventArgs) Handles btn_StopAlarm.Click
+        If Worker_SetAlarm.IsBusy Then Worker_SetAlarm.CancelAsync()
+        If Worker_Alarm.IsBusy Then Worker_SetAlarm.CancelAsync()
+        If AudioPlayer IsNot Nothing Then AudioPlayer.StopPlayback()
+        AudioPlayer = Nothing
+        If AlarmThread IsNot Nothing Then AlarmThread.Abort()
+        If Speech_Manager.isSpeaking Then
+            Speech_Manager.StopAll()
+        End If
+        txt_Elapsed.Value = 0
+        txt_LastChecked.Text = "-"
+        Timer_Tick.Stop()
+        WaitDialog.Close()
+        EnableControls()
+    End Sub
+
+    Private Sub Worker_SetAlarm_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_SetAlarm.DoWork
+        Me.Invoke(Sub()
+                      WaitDialog.Show(Me)
+                      DisableControls()
+                      btn_StopAlarm.Enabled = False
+                      tp_About.Enabled = False
+                  End Sub)
+        OldList = GetList()
+        If OldList IsNot Nothing Then
+            Me.Invoke(Sub()
+                          Timer_Tick.Start()
+                          btn_StopAlarm.Enabled = True
+                          tp_About.Enabled = True
+                          txt_CurrentCount.Text = OldList.Count
+                          txt_PreviousCount.Text = OldList.Count
+                      End Sub)
+        Else
+            Me.Invoke(Sub()
+                          EnableControls()
+                      End Sub)
+        End If
+        Me.Invoke(Sub()
+                      WaitDialog.Close()
+                  End Sub)
     End Sub
 
 #End Region
@@ -345,6 +418,7 @@ Public Class frm_Main
 
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Licenser.LicenseKey = LicenseKeys.GetXceedFTPKey ' Well I Wish I Could Push the Key to Git. But I Can't... So Specify Your Own Key Here :p
+        FTP = New FtpClient
         Dim Voices As String() = Speech_Manager.GetVoices
         If Voices.Count > 0 Then
             cmb_Voice.Properties.Items.AddRange(Voices)
