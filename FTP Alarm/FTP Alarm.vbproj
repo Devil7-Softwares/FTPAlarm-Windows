@@ -59,6 +59,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -92,6 +93,9 @@
     <Compile Include="Classes\LicenseKeys.vb" />
     <Compile Include="Classes\Settings.vb" />
     <Compile Include="Classes\SettingsManager.vb" />
+    <Compile Include="Classes\Speech.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\TimeLabel.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -162,6 +166,9 @@
     <None Include="Resources\alarm.ico" />
     <None Include="Resources\abort.ico" />
     <None Include="Resources\splash.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
