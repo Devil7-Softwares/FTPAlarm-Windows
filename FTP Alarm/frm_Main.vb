@@ -144,6 +144,10 @@ Public Class frm_Main
         btn_StopAlarm.Enabled = False
     End Sub
 
+    Function ConnectionAvailable() As Boolean
+        Return My.Computer.Network.Ping(SettingsManager.Settings.ServerAddress)
+    End Function
+
 #End Region
 
 #Region "Events - Settings"
@@ -291,23 +295,27 @@ Public Class frm_Main
 
     Private Sub Worker_Alarm_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_Alarm.DoWork
 
-        Dim NewList As List(Of String) = GetList()
+        If ConnectionAvailable() Then
+            Dim NewList As List(Of String) = GetList()
 
-        If NewList IsNot Nothing Then
-            Me.Invoke(Sub()
-                          txt_CurrentCount.Text = NewList.Count
-                          txt_PreviousCount.Text = OldList.Count
-                      End Sub)
-            Dim C1 As IEnumerable(Of String) = NewList.Except(OldList)
-            Dim C2 As IEnumerable(Of String) = OldList.Except(NewList)
-            If C1.Count > 0 Or C2.Count > 0 Then
-                AudioPlayer = New ZPlay
-                AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
-                AlarmThread.Start()
-            Else
-                OldList = NewList
-                Timer_Tick.Start()
+            If NewList IsNot Nothing Then
+                Me.Invoke(Sub()
+                              txt_CurrentCount.Text = NewList.Count
+                              txt_PreviousCount.Text = OldList.Count
+                          End Sub)
+                Dim C1 As IEnumerable(Of String) = NewList.Except(OldList)
+                Dim C2 As IEnumerable(Of String) = OldList.Except(NewList)
+                If C1.Count > 0 Or C2.Count > 0 Then
+                    AudioPlayer = New ZPlay
+                    AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
+                    AlarmThread.Start()
+                Else
+                    OldList = NewList
+                    Timer_Tick.Start()
+                End If
             End If
+        Else
+            Timer_Tick.Start()
         End If
 
     End Sub
@@ -359,7 +367,11 @@ Public Class frm_Main
     End Sub
 
     Private Sub btn_SetAlarm_Click(sender As Object, e As EventArgs) Handles btn_SetAlarm.Click
-        Worker_SetAlarm.RunWorkerAsync()
+        If ConnectionAvailable() Then
+            Worker_SetAlarm.RunWorkerAsync()
+        Else
+            MsgBox("Unable to connect with given server/host.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+        End If
     End Sub
 
     Private Sub btn_StopAlarm_Click(sender As Object, e As EventArgs) Handles btn_StopAlarm.Click
