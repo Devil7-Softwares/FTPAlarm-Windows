@@ -56,8 +56,11 @@ Public Class frm_Main
 
         Me.txt_From.EditValue = SettingsManager.Settings.EmailFromAddress
         Me.txt_To.EditValue = SettingsManager.Settings.EmailToAddresses
+        Me.txt_EmailMessage.EditValue = SettingsManager.Settings.MailMessage
 
         If SettingsManager.Settings.Voice <> "" Then Me.cmb_Voice.EditValue = SettingsManager.Settings.Voice
+        Me.txt_VoiceMessage.EditValue = SettingsManager.Settings.VoiceMessage
+        Me.txt_Loop.Value = SettingsManager.Settings.VoiceMessageLoop
 
         Me.txt_RingTone.EditValue = SettingsManager.Settings.Ringtone
 
@@ -192,6 +195,18 @@ Public Class frm_Main
 
     Private Sub txt_MaxDepth_EditValueChanged(sender As Object, e As EventArgs) Handles txt_MaxDepth.EditValueChanged
         SettingsManager.Settings.MaxDepth = txt_MaxDepth.Value
+    End Sub
+
+    Private Sub txt_EmailMessage_EditValueChanged(sender As Object, e As EventArgs) Handles txt_EmailMessage.EditValueChanged
+        SettingsManager.Settings.MailMessage = txt_EmailMessage.EditValue
+    End Sub
+
+    Private Sub txt_VoiceMessage_EditValueChanged(sender As Object, e As EventArgs) Handles txt_VoiceMessage.EditValueChanged
+        SettingsManager.Settings.VoiceMessage = txt_VoiceMessage.EditValue
+    End Sub
+
+    Private Sub txt_Loop_ValueChanged(sender As Object, e As EventArgs) Handles txt_Loop.ValueChanged
+        SettingsManager.Settings.VoiceMessageLoop = txt_Loop.Value
     End Sub
 
     Private Sub cb_IncludeFiles_CheckedChanged(sender As Object, e As EventArgs) Handles cb_IncludeFiles.CheckedChanged
