@@ -39,5 +39,6 @@ Public Class Settings
     Property VoiceMessage As String = "Alert. A New file has been created. Alert. A New File has been created."
     Property VoiceMessageLoop As Integer = 2
     Property MailMessage As String = "Alert...! A File/Directory Has Been Created/Modified in Your Given FTP Server."
+    Property AutoSetAlarm As Boolean = False
 
 End Class

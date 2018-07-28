@@ -74,10 +74,16 @@ Partial Class frm_Main
         Me.txt_RingTone = New DevExpress.XtraEditors.ButtonEdit()
         Me.lbl_Ringtone = New DevExpress.XtraEditors.LabelControl()
         Me.grp_Voice = New DevExpress.XtraEditors.GroupControl()
+        Me.txt_Loop = New DevExpress.XtraEditors.SpinEdit()
+        Me.lbl_Loop = New DevExpress.XtraEditors.LabelControl()
+        Me.txt_VoiceMessage = New DevExpress.XtraEditors.TextEdit()
+        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.btn_TestVoice = New DevExpress.XtraEditors.SimpleButton()
         Me.lbl_Voice = New DevExpress.XtraEditors.LabelControl()
         Me.cmb_Voice = New DevExpress.XtraEditors.ComboBoxEdit()
         Me.grp_Email = New DevExpress.XtraEditors.GroupControl()
+        Me.lbl_EmailMessage = New DevExpress.XtraEditors.LabelControl()
+        Me.txt_EmailMessage = New DevExpress.XtraEditors.TextEdit()
         Me.txt_To = New DevExpress.XtraEditors.TextEdit()
         Me.lbl_To = New DevExpress.XtraEditors.LabelControl()
         Me.lbl_Gmail = New DevExpress.XtraEditors.LabelControl()
@@ -107,6 +113,11 @@ Partial Class frm_Main
         Me.lbl_Colon2 = New DevExpress.XtraEditors.LabelControl()
         Me.txt_FTPServer = New DevExpress.XtraEditors.TextEdit()
         Me.txt_Port = New DevExpress.XtraEditors.TextEdit()
+        Me.grp_General = New DevExpress.XtraEditors.GroupControl()
+        Me.lbl_AutoSetAlarm = New DevExpress.XtraEditors.LabelControl()
+        Me.toggle_AutoSetAlarm = New DevExpress.XtraEditors.ToggleSwitch()
+        Me.toggle_AutoStartApp = New DevExpress.XtraEditors.ToggleSwitch()
+        Me.lbl_AutoStartApp = New DevExpress.XtraEditors.LabelControl()
         Me.tp_About = New DevExpress.XtraBars.Navigation.TabNavigationPage()
         Me.About = New Devil7.Automation.FTPAlarm.About()
         Me.Timer_Tick = New System.Windows.Forms.Timer(Me.components)
@@ -114,12 +125,6 @@ Partial Class frm_Main
         Me.Speech_Manager = New Devil7.Automation.FTPAlarm.Speech()
         Me.OpenAudio = New System.Windows.Forms.OpenFileDialog()
         Me.Worker_SetAlarm = New System.ComponentModel.BackgroundWorker()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_VoiceMessage = New DevExpress.XtraEditors.TextEdit()
-        Me.txt_EmailMessage = New DevExpress.XtraEditors.TextEdit()
-        Me.lbl_EmailMessage = New DevExpress.XtraEditors.LabelControl()
-        Me.lbl_Loop = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_Loop = New DevExpress.XtraEditors.SpinEdit()
         CType(Me.MainPane, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPane.SuspendLayout()
         Me.tp_Alarm.SuspendLayout()
@@ -137,9 +142,12 @@ Partial Class frm_Main
         CType(Me.txt_RingTone.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grp_Voice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Voice.SuspendLayout()
+        CType(Me.txt_Loop.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txt_VoiceMessage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmb_Voice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grp_Email, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Email.SuspendLayout()
+        CType(Me.txt_EmailMessage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_To.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_From.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grp_Notifications, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,10 +164,11 @@ Partial Class frm_Main
         Me.table_FTPSub_1.SuspendLayout()
         CType(Me.txt_FTPServer.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txt_Port.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grp_General, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grp_General.SuspendLayout()
+        CType(Me.toggle_AutoSetAlarm.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.toggle_AutoStartApp.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tp_About.SuspendLayout()
-        CType(Me.txt_VoiceMessage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt_EmailMessage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt_Loop.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MainPane
@@ -399,6 +408,7 @@ Partial Class frm_Main
         Me.tp_Settings.Controls.Add(Me.grp_Email)
         Me.tp_Settings.Controls.Add(Me.grp_Notifications)
         Me.tp_Settings.Controls.Add(Me.grp_Credentials)
+        Me.tp_Settings.Controls.Add(Me.grp_General)
         Me.tp_Settings.Name = "tp_Settings"
         Me.tp_Settings.Size = New System.Drawing.Size(451, 295)
         '
@@ -409,7 +419,7 @@ Partial Class frm_Main
         Me.grp_Ringtone.Controls.Add(Me.txt_RingTone)
         Me.grp_Ringtone.Controls.Add(Me.lbl_Ringtone)
         Me.grp_Ringtone.Dock = System.Windows.Forms.DockStyle.Top
-        Me.grp_Ringtone.Location = New System.Drawing.Point(0, 342)
+        Me.grp_Ringtone.Location = New System.Drawing.Point(0, 427)
         Me.grp_Ringtone.Name = "grp_Ringtone"
         Me.grp_Ringtone.Size = New System.Drawing.Size(434, 75)
         Me.grp_Ringtone.TabIndex = 3
@@ -462,11 +472,45 @@ Partial Class frm_Main
         Me.grp_Voice.Controls.Add(Me.lbl_Voice)
         Me.grp_Voice.Controls.Add(Me.cmb_Voice)
         Me.grp_Voice.Dock = System.Windows.Forms.DockStyle.Top
-        Me.grp_Voice.Location = New System.Drawing.Point(0, 266)
+        Me.grp_Voice.Location = New System.Drawing.Point(0, 351)
         Me.grp_Voice.Name = "grp_Voice"
         Me.grp_Voice.Size = New System.Drawing.Size(434, 76)
         Me.grp_Voice.TabIndex = 2
         Me.grp_Voice.Text = "Voice Alert"
+        '
+        'txt_Loop
+        '
+        Me.txt_Loop.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.txt_Loop.Location = New System.Drawing.Point(354, 51)
+        Me.txt_Loop.Name = "txt_Loop"
+        Me.txt_Loop.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
+        Me.txt_Loop.Size = New System.Drawing.Size(75, 20)
+        Me.txt_Loop.TabIndex = 10
+        '
+        'lbl_Loop
+        '
+        Me.lbl_Loop.Location = New System.Drawing.Point(318, 54)
+        Me.lbl_Loop.Name = "lbl_Loop"
+        Me.lbl_Loop.Size = New System.Drawing.Size(30, 13)
+        Me.lbl_Loop.TabIndex = 9
+        Me.lbl_Loop.Text = "Loop :"
+        '
+        'txt_VoiceMessage
+        '
+        Me.txt_VoiceMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_VoiceMessage.Location = New System.Drawing.Point(63, 51)
+        Me.txt_VoiceMessage.Name = "txt_VoiceMessage"
+        Me.txt_VoiceMessage.Size = New System.Drawing.Size(249, 20)
+        Me.txt_VoiceMessage.TabIndex = 4
+        '
+        'LabelControl1
+        '
+        Me.LabelControl1.Location = New System.Drawing.Point(8, 54)
+        Me.LabelControl1.Name = "LabelControl1"
+        Me.LabelControl1.Size = New System.Drawing.Size(49, 13)
+        Me.LabelControl1.TabIndex = 3
+        Me.LabelControl1.Text = "Message :"
         '
         'btn_TestVoice
         '
@@ -506,11 +550,28 @@ Partial Class frm_Main
         Me.grp_Email.Controls.Add(Me.txt_From)
         Me.grp_Email.Controls.Add(Me.lbl_From)
         Me.grp_Email.Dock = System.Windows.Forms.DockStyle.Top
-        Me.grp_Email.Location = New System.Drawing.Point(0, 164)
+        Me.grp_Email.Location = New System.Drawing.Point(0, 249)
         Me.grp_Email.Name = "grp_Email"
         Me.grp_Email.Size = New System.Drawing.Size(434, 102)
         Me.grp_Email.TabIndex = 1
         Me.grp_Email.Text = "Email"
+        '
+        'lbl_EmailMessage
+        '
+        Me.lbl_EmailMessage.Location = New System.Drawing.Point(8, 81)
+        Me.lbl_EmailMessage.Name = "lbl_EmailMessage"
+        Me.lbl_EmailMessage.Size = New System.Drawing.Size(49, 13)
+        Me.lbl_EmailMessage.TabIndex = 7
+        Me.lbl_EmailMessage.Text = "Message :"
+        '
+        'txt_EmailMessage
+        '
+        Me.txt_EmailMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt_EmailMessage.Location = New System.Drawing.Point(63, 78)
+        Me.txt_EmailMessage.Name = "txt_EmailMessage"
+        Me.txt_EmailMessage.Size = New System.Drawing.Size(366, 20)
+        Me.txt_EmailMessage.TabIndex = 6
         '
         'txt_To
         '
@@ -576,7 +637,7 @@ Partial Class frm_Main
         Me.grp_Notifications.Controls.Add(Me.lbl_Ringtone1)
         Me.grp_Notifications.Controls.Add(Me.lbl_Email)
         Me.grp_Notifications.Dock = System.Windows.Forms.DockStyle.Top
-        Me.grp_Notifications.Location = New System.Drawing.Point(0, 77)
+        Me.grp_Notifications.Location = New System.Drawing.Point(0, 162)
         Me.grp_Notifications.Name = "grp_Notifications"
         Me.grp_Notifications.Size = New System.Drawing.Size(434, 87)
         Me.grp_Notifications.TabIndex = 5
@@ -637,7 +698,7 @@ Partial Class frm_Main
         '
         Me.grp_Credentials.Controls.Add(Me.table_FTPMain)
         Me.grp_Credentials.Dock = System.Windows.Forms.DockStyle.Top
-        Me.grp_Credentials.Location = New System.Drawing.Point(0, 0)
+        Me.grp_Credentials.Location = New System.Drawing.Point(0, 85)
         Me.grp_Credentials.Name = "grp_Credentials"
         Me.grp_Credentials.Size = New System.Drawing.Size(434, 77)
         Me.grp_Credentials.TabIndex = 0
@@ -799,6 +860,53 @@ Partial Class frm_Main
         Me.txt_Port.Size = New System.Drawing.Size(106, 20)
         Me.txt_Port.TabIndex = 4
         '
+        'grp_General
+        '
+        Me.grp_General.Controls.Add(Me.lbl_AutoSetAlarm)
+        Me.grp_General.Controls.Add(Me.toggle_AutoSetAlarm)
+        Me.grp_General.Controls.Add(Me.toggle_AutoStartApp)
+        Me.grp_General.Controls.Add(Me.lbl_AutoStartApp)
+        Me.grp_General.Dock = System.Windows.Forms.DockStyle.Top
+        Me.grp_General.Location = New System.Drawing.Point(0, 0)
+        Me.grp_General.Name = "grp_General"
+        Me.grp_General.Size = New System.Drawing.Size(434, 85)
+        Me.grp_General.TabIndex = 6
+        Me.grp_General.Text = "General"
+        '
+        'lbl_AutoSetAlarm
+        '
+        Me.lbl_AutoSetAlarm.Location = New System.Drawing.Point(12, 58)
+        Me.lbl_AutoSetAlarm.Name = "lbl_AutoSetAlarm"
+        Me.lbl_AutoSetAlarm.Size = New System.Drawing.Size(199, 13)
+        Me.lbl_AutoSetAlarm.TabIndex = 2
+        Me.lbl_AutoSetAlarm.Text = "Automatically Turn On Alarm On Startup :"
+        '
+        'toggle_AutoSetAlarm
+        '
+        Me.toggle_AutoSetAlarm.Location = New System.Drawing.Point(217, 53)
+        Me.toggle_AutoSetAlarm.Name = "toggle_AutoSetAlarm"
+        Me.toggle_AutoSetAlarm.Properties.OffText = "Off"
+        Me.toggle_AutoSetAlarm.Properties.OnText = "On"
+        Me.toggle_AutoSetAlarm.Size = New System.Drawing.Size(95, 24)
+        Me.toggle_AutoSetAlarm.TabIndex = 1
+        '
+        'toggle_AutoStartApp
+        '
+        Me.toggle_AutoStartApp.Location = New System.Drawing.Point(217, 23)
+        Me.toggle_AutoStartApp.Name = "toggle_AutoStartApp"
+        Me.toggle_AutoStartApp.Properties.OffText = "Off"
+        Me.toggle_AutoStartApp.Properties.OnText = "On"
+        Me.toggle_AutoStartApp.Size = New System.Drawing.Size(95, 24)
+        Me.toggle_AutoStartApp.TabIndex = 1
+        '
+        'lbl_AutoStartApp
+        '
+        Me.lbl_AutoStartApp.Location = New System.Drawing.Point(42, 28)
+        Me.lbl_AutoStartApp.Name = "lbl_AutoStartApp"
+        Me.lbl_AutoStartApp.Size = New System.Drawing.Size(169, 13)
+        Me.lbl_AutoStartApp.TabIndex = 0
+        Me.lbl_AutoStartApp.Text = "Automatically Start With Windows :"
+        '
         'tp_About
         '
         Me.tp_About.AutoScroll = True
@@ -838,57 +946,6 @@ Partial Class frm_Main
         'Worker_SetAlarm
         '
         '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(8, 54)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(49, 13)
-        Me.LabelControl1.TabIndex = 3
-        Me.LabelControl1.Text = "Message :"
-        '
-        'txt_VoiceMessage
-        '
-        Me.txt_VoiceMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_VoiceMessage.Location = New System.Drawing.Point(63, 51)
-        Me.txt_VoiceMessage.Name = "txt_VoiceMessage"
-        Me.txt_VoiceMessage.Size = New System.Drawing.Size(249, 20)
-        Me.txt_VoiceMessage.TabIndex = 4
-        '
-        'txt_EmailMessage
-        '
-        Me.txt_EmailMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_EmailMessage.Location = New System.Drawing.Point(63, 78)
-        Me.txt_EmailMessage.Name = "txt_EmailMessage"
-        Me.txt_EmailMessage.Size = New System.Drawing.Size(366, 20)
-        Me.txt_EmailMessage.TabIndex = 6
-        '
-        'lbl_EmailMessage
-        '
-        Me.lbl_EmailMessage.Location = New System.Drawing.Point(8, 81)
-        Me.lbl_EmailMessage.Name = "lbl_EmailMessage"
-        Me.lbl_EmailMessage.Size = New System.Drawing.Size(49, 13)
-        Me.lbl_EmailMessage.TabIndex = 7
-        Me.lbl_EmailMessage.Text = "Message :"
-        '
-        'lbl_Loop
-        '
-        Me.lbl_Loop.Location = New System.Drawing.Point(318, 54)
-        Me.lbl_Loop.Name = "lbl_Loop"
-        Me.lbl_Loop.Size = New System.Drawing.Size(30, 13)
-        Me.lbl_Loop.TabIndex = 9
-        Me.lbl_Loop.Text = "Loop :"
-        '
-        'txt_Loop
-        '
-        Me.txt_Loop.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.txt_Loop.Location = New System.Drawing.Point(354, 51)
-        Me.txt_Loop.Name = "txt_Loop"
-        Me.txt_Loop.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txt_Loop.Size = New System.Drawing.Size(75, 20)
-        Me.txt_Loop.TabIndex = 10
-        '
         'frm_Main
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -920,10 +977,13 @@ Partial Class frm_Main
         CType(Me.grp_Voice, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_Voice.ResumeLayout(False)
         Me.grp_Voice.PerformLayout()
+        CType(Me.txt_Loop.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txt_VoiceMessage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmb_Voice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grp_Email, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_Email.ResumeLayout(False)
         Me.grp_Email.PerformLayout()
+        CType(Me.txt_EmailMessage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_To.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_From.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grp_Notifications, System.ComponentModel.ISupportInitialize).EndInit()
@@ -943,10 +1003,12 @@ Partial Class frm_Main
         Me.table_FTPSub_1.PerformLayout()
         CType(Me.txt_FTPServer.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txt_Port.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grp_General, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grp_General.ResumeLayout(False)
+        Me.grp_General.PerformLayout()
+        CType(Me.toggle_AutoSetAlarm.Properties, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.toggle_AutoStartApp.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tp_About.ResumeLayout(False)
-        CType(Me.txt_VoiceMessage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt_EmailMessage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt_Loop.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1026,4 +1088,9 @@ Partial Class frm_Main
     Friend WithEvents txt_EmailMessage As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txt_Loop As DevExpress.XtraEditors.SpinEdit
     Friend WithEvents lbl_Loop As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents grp_General As DevExpress.XtraEditors.GroupControl
+    Friend WithEvents toggle_AutoStartApp As DevExpress.XtraEditors.ToggleSwitch
+    Friend WithEvents lbl_AutoStartApp As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents lbl_AutoSetAlarm As DevExpress.XtraEditors.LabelControl
+    Friend WithEvents toggle_AutoSetAlarm As DevExpress.XtraEditors.ToggleSwitch
 End Class

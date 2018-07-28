@@ -39,6 +39,8 @@ Public Class frm_Main
     Dim AudioPlayer As ZPlay
     Dim AlarmThread As Threading.Thread
 
+    Dim Loaded As Boolean = False
+
 #Region "Subs"
 
     Sub LoadSettings()
@@ -67,6 +69,12 @@ Public Class frm_Main
         Me.txt_Hour.Value = SettingsManager.Settings.IntervalHour
         Me.txt_Minutes.Value = SettingsManager.Settings.IntervalMinutes
         Me.cb_IncludeFiles.Checked = SettingsManager.Settings.IncludeFiles
+
+        If My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run").GetValue(My.Application.Info.Title) Is Nothing Then
+            Me.toggle_AutoStartApp.IsOn = False
+        Else
+            Me.toggle_AutoStartApp.IsOn = True
+        End If
 
     End Sub
 
@@ -211,6 +219,30 @@ Public Class frm_Main
 
     Private Sub cb_IncludeFiles_CheckedChanged(sender As Object, e As EventArgs) Handles cb_IncludeFiles.CheckedChanged
         SettingsManager.Settings.IncludeFiles = cb_IncludeFiles.Checked
+    End Sub
+
+    Private Sub toggle_AutoSetAlarm_Toggled(sender As Object, e As EventArgs) Handles toggle_AutoSetAlarm.Toggled
+        SettingsManager.Settings.AutoSetAlarm = toggle_AutoSetAlarm.IsOn
+    End Sub
+
+    Private Sub toggle_AutoStartApp_Toggled(sender As Object, e As EventArgs) Handles toggle_AutoStartApp.Toggled
+        If Loaded Then
+            If toggle_AutoStartApp.IsOn Then
+                Try
+                    My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).SetValue(My.Application.Info.Title, Application.ExecutablePath)
+                Catch ex As Exception
+                    toggle_AutoStartApp.IsOn = False
+                End Try
+            Else
+                If My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run").GetValue(My.Application.Info.Title) IsNot Nothing Then
+                    Try
+                        My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run", True).DeleteValue(My.Application.Info.Title)
+                    Catch ex As Exception
+                        toggle_AutoStartApp.IsOn = True
+                    End Try
+                End If
+            End If
+        End If
     End Sub
 
     Private Sub txt_RingTone_ButtonClick(sender As Object, e As ButtonPressedEventArgs) Handles txt_RingTone.ButtonClick
@@ -444,6 +476,13 @@ Public Class frm_Main
 
     Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SettingsManager.SaveSettings()
+    End Sub
+
+    Private Sub frm_Main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Loaded = True
+        If SettingsManager.Settings.AutoSetAlarm Then
+            btn_SetAlarm.PerformClick()
+        End If
     End Sub
 
 End Class
