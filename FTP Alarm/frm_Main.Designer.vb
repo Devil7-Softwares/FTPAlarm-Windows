@@ -964,7 +964,7 @@ Partial Class frm_Main
         'Timer_MessageListener
         '
         Me.Timer_MessageListener.Enabled = True
-        Me.Timer_MessageListener.Interval = 500
+        Me.Timer_MessageListener.Interval = 1
         '
         'frm_Main
         '
