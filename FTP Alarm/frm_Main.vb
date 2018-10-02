@@ -41,45 +41,118 @@ Public Class frm_Main
 
     Dim Loaded As Boolean = False
 
+    Dim FTPMessages As New List(Of String)
+
+#Region "Logging"
+    Private ReadOnly LogFile As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs", "Log_" & Now.ToString("ddMMyyyy_hhmmss") & ".txt")
+
+    Enum LogType As Integer
+        Info = 0
+        Warn = 1
+        Err = 2
+        FTP = 3
+    End Enum
+
+    Public Sub Write2Console(ByVal Text As String, ByVal Color As Color)
+        If InvokeRequired Then
+            Invoke(Sub() Write2Console(Text, Color))
+        Else
+            txt_Console.SelectionColor = Color
+            txt_Console.AppendText(Text)
+            PostMessage(txt_Console.Handle, WM_VSCROLL, CType(SB_BOTTOM, IntPtr), CType(IntPtr.Zero, IntPtr))
+        End If
+    End Sub
+
+    Sub Log(ByVal Type As LogType, ByVal Message As String)
+        Dim LogFolder As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs")
+        If Not My.Computer.FileSystem.DirectoryExists(LogFolder) Then My.Computer.FileSystem.CreateDirectory(LogFolder)
+        Dim Type_ As String = "I"
+        Dim Color As Color = Color.Green
+        Select Case Type
+            Case LogType.Info
+                Type_ = "I"
+                Color = Color.Green
+            Case LogType.Warn
+                Type_ = "W"
+                Color = Color.Yellow
+            Case LogType.Err
+                Type_ = "E"
+                Color = Color.Red
+            Case LogType.FTP
+                Type = "F"
+                Color = Color.Blue
+        End Select
+
+        Dim S As String = String.Format("{2}{0}{3}{0}{4}{1}", vbTab, vbNewLine, Now.ToString("dd-MM-yyyy_hh:mm:ss"), Type_, Message)
+        My.Computer.FileSystem.WriteAllText(LogFile, S, True)
+        Write2Console(S, Color)
+    End Sub
+
+    Sub LogInfo(ByVal Message As String)
+        Log(LogType.Info, Message)
+    End Sub
+
+    Sub LogWarn(ByVal Message As String)
+        Log(LogType.Warn, Message)
+    End Sub
+
+    Sub LogError(ByVal Message As String)
+        Log(LogType.Err, Message)
+    End Sub
+
+    Sub LogFTP(ByVal Message As String)
+        Log(LogType.FTP, Message)
+    End Sub
+
+    Sub LogError(ByVal Tag As String, ByVal Exception As Exception)
+        Log(LogType.Err, Tag & " : " & Exception.Message)
+    End Sub
+#End Region
+
 #Region "Subs"
 
     Sub LoadSettings()
+        Try
+            LogInfo("Loading Settings...")
+            SettingsManager.LoadSettings()
 
-        SettingsManager.LoadSettings()
+            Me.txt_FTPServer.EditValue = Encryption.Decrypt(SettingsManager.Settings.ServerAddress)
+            Me.txt_Port.EditValue = SettingsManager.Settings.Port
+            Me.txt_Username.EditValue = Encryption.Decrypt(SettingsManager.Settings.Username)
+            Me.txt_Password.EditValue = Encryption.Decrypt(SettingsManager.Settings.Password)
 
-        Me.txt_FTPServer.EditValue = Encryption.Decrypt(SettingsManager.Settings.ServerAddress)
-        Me.txt_Port.EditValue = SettingsManager.Settings.Port
-        Me.txt_Username.EditValue = Encryption.Decrypt(SettingsManager.Settings.Username)
-        Me.txt_Password.EditValue = Encryption.Decrypt(SettingsManager.Settings.Password)
+            Me.toggle_Email.IsOn = SettingsManager.Settings.EmailNotification
+            Me.toggle_Ringtone.IsOn = SettingsManager.Settings.RingtoneNotification
+            Me.toggle_Voice.IsOn = SettingsManager.Settings.VoiceNotification
 
-        Me.toggle_Email.IsOn = SettingsManager.Settings.EmailNotification
-        Me.toggle_Ringtone.IsOn = SettingsManager.Settings.RingtoneNotification
-        Me.toggle_Voice.IsOn = SettingsManager.Settings.VoiceNotification
+            Me.txt_From.EditValue = SettingsManager.Settings.EmailFromAddress
+            Me.txt_To.EditValue = SettingsManager.Settings.EmailToAddresses
+            Me.txt_EmailMessage.EditValue = SettingsManager.Settings.MailMessage
 
-        Me.txt_From.EditValue = SettingsManager.Settings.EmailFromAddress
-        Me.txt_To.EditValue = SettingsManager.Settings.EmailToAddresses
-        Me.txt_EmailMessage.EditValue = SettingsManager.Settings.MailMessage
+            If SettingsManager.Settings.Voice <> "" Then Me.cmb_Voice.EditValue = SettingsManager.Settings.Voice
+            Me.txt_VoiceMessage.EditValue = SettingsManager.Settings.VoiceMessage
+            Me.txt_Loop.Value = SettingsManager.Settings.VoiceMessageLoop
 
-        If SettingsManager.Settings.Voice <> "" Then Me.cmb_Voice.EditValue = SettingsManager.Settings.Voice
-        Me.txt_VoiceMessage.EditValue = SettingsManager.Settings.VoiceMessage
-        Me.txt_Loop.Value = SettingsManager.Settings.VoiceMessageLoop
+            Me.txt_RingTone.EditValue = SettingsManager.Settings.Ringtone
 
-        Me.txt_RingTone.EditValue = SettingsManager.Settings.Ringtone
+            Me.txt_Hour.Value = SettingsManager.Settings.IntervalHour
+            Me.txt_Minutes.Value = SettingsManager.Settings.IntervalMinutes
+            Me.cb_IncludeFiles.Checked = SettingsManager.Settings.IncludeFiles
 
-        Me.txt_Hour.Value = SettingsManager.Settings.IntervalHour
-        Me.txt_Minutes.Value = SettingsManager.Settings.IntervalMinutes
-        Me.cb_IncludeFiles.Checked = SettingsManager.Settings.IncludeFiles
-
-        If My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run").GetValue(My.Application.Info.Title) Is Nothing Then
-            Me.toggle_AutoStartApp.IsOn = False
-        Else
-            Me.toggle_AutoStartApp.IsOn = True
-        End If
-
+            If My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run").GetValue(My.Application.Info.Title) Is Nothing Then
+                Me.toggle_AutoStartApp.IsOn = False
+            Else
+                Me.toggle_AutoStartApp.IsOn = True
+            End If
+        Catch ex As Exception
+            LogError("LoadSettings", ex)
+        End Try
     End Sub
 
     Function GetList() As List(Of String)
         Try
+            LogInfo("Fetching List...")
+            If FTP.Connected Then FTP.Disconnect()
             FTP.Connect(Encryption.Decrypt(SettingsManager.Settings.ServerAddress), SettingsManager.Settings.Port)
 
             Dim Username As String = Encryption.Decrypt(SettingsManager.Settings.Username)
@@ -98,6 +171,7 @@ Public Class frm_Main
 
             Return Files
         Catch ex As Exception
+            LogError("GetList", ex)
             Return Nothing
         End Try
     End Function
@@ -145,7 +219,7 @@ Public Class frm_Main
     End Sub
 
     Function ConnectionAvailable() As Boolean
-        Return My.Computer.Network.Ping(SettingsManager.Settings.ServerAddress)
+        Return My.Computer.Network.Ping(Encryption.Decrypt(SettingsManager.Settings.ServerAddress))
     End Function
 
 #End Region
@@ -294,8 +368,9 @@ Public Class frm_Main
     End Sub
 
     Private Sub Worker_Alarm_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_Alarm.DoWork
-
+        LogInfo("Checking FTP for Changes... Checking Connection...")
         If ConnectionAvailable() Then
+            LogInfo("Connection Available... Checking FTP...")
             Dim NewList As List(Of String) = GetList()
 
             If NewList IsNot Nothing Then
@@ -306,64 +381,70 @@ Public Class frm_Main
                 Dim C1 As IEnumerable(Of String) = NewList.Except(OldList)
                 Dim C2 As IEnumerable(Of String) = OldList.Except(NewList)
                 If C1.Count > 0 Or C2.Count > 0 Then
+                    LogWarn("Changed Detected... Triggering Events...")
                     AudioPlayer = New ZPlay
                     AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
                     AlarmThread.Start()
                 Else
+                    LogWarn("No Changes...")
                     OldList = NewList
                     Timer_Tick.Start()
                 End If
             End If
         Else
+            LogWarn("No Connection Available. Aborting...")
             Timer_Tick.Start()
         End If
 
     End Sub
 
     Sub TriggerAlarm()
+        Try
+            LogInfo("Triggering Alarm...")
+            Me.Invoke(Sub()
+                          Me.Show()
+                          Me.BringToFront()
+                          Me.Focus()
+                      End Sub)
 
-        Me.Invoke(Sub()
-                      Me.Show()
-                      Me.BringToFront()
-                      Me.Focus()
-                  End Sub)
-
-        ' Email Notification
-        If SettingsManager.Settings.EmailNotification Then
-            Dim th1 As New Threading.Thread(AddressOf EmailNotification)
-            th1.Start()
-        End If
-
-        ' Voice Notification
-        If SettingsManager.Settings.VoiceNotification Then
-            Dim S As String = ""
-            For i As Integer = 1 To SettingsManager.Settings.VoiceMessageLoop
-                S &= SettingsManager.Settings.VoiceMessage & " "
-            Next
-            Speech_Manager.Start(S.Trim)
-            Threading.Thread.Sleep(2000)
-            Do Until Speech_Manager.isSpeaking = False
-                Threading.Thread.Sleep(1000)
-            Loop
-        End If
-
-        ' Ringtone Notification
-        If SettingsManager.Settings.RingtoneNotification AndAlso AudioPlayer IsNot Nothing Then
-            Dim AudioFile As String = IO.Path.Combine(Application.StartupPath, txt_RingTone.Text)
-            If My.Computer.FileSystem.FileExists(AudioFile) Then
-                AudioPlayer.OpenFile(AudioFile, TStreamFormat.sfAutodetect)
-            Else
-                AudioPlayer.OpenFile(IO.Path.Combine(Application.StartupPath, "Ringtone.wav"), TStreamFormat.sfAutodetect)
+            ' Email Notification
+            If SettingsManager.Settings.EmailNotification Then
+                Dim th1 As New Threading.Thread(AddressOf EmailNotification)
+                th1.Start()
             End If
-            Do Until 1 = 0
-                Dim t As New TStreamStatus
-                AudioPlayer.GetStatus(t)
-                If t.fPlay = False Then
-                    AudioPlayer.StartPlayback()
-                End If
-            Loop
-        End If
 
+            ' Voice Notification
+            If SettingsManager.Settings.VoiceNotification Then
+                Dim S As String = ""
+                For i As Integer = 1 To SettingsManager.Settings.VoiceMessageLoop
+                    S &= SettingsManager.Settings.VoiceMessage & " "
+                Next
+                Speech_Manager.Start(S.Trim)
+                Threading.Thread.Sleep(2000)
+                Do Until Speech_Manager.isSpeaking = False
+                    Threading.Thread.Sleep(1000)
+                Loop
+            End If
+
+            ' Ringtone Notification
+            If SettingsManager.Settings.RingtoneNotification AndAlso AudioPlayer IsNot Nothing Then
+                Dim AudioFile As String = IO.Path.Combine(Application.StartupPath, txt_RingTone.Text)
+                If My.Computer.FileSystem.FileExists(AudioFile) Then
+                    AudioPlayer.OpenFile(AudioFile, TStreamFormat.sfAutodetect)
+                Else
+                    AudioPlayer.OpenFile(IO.Path.Combine(Application.StartupPath, "Ringtone.wav"), TStreamFormat.sfAutodetect)
+                End If
+                Do Until 1 = 0
+                    Dim t As New TStreamStatus
+                    AudioPlayer.GetStatus(t)
+                    If t.fPlay = False Then
+                        AudioPlayer.StartPlayback()
+                    End If
+                Loop
+            End If
+        Catch ex As Exception
+            LogError("TriggerAlarm", ex)
+        End Try
     End Sub
 
     Private Sub btn_SetAlarm_Click(sender As Object, e As EventArgs) Handles btn_SetAlarm.Click
@@ -375,6 +456,7 @@ Public Class frm_Main
     End Sub
 
     Private Sub btn_StopAlarm_Click(sender As Object, e As EventArgs) Handles btn_StopAlarm.Click
+        LogInfo("Stopping Alarm...")
         If Worker_SetAlarm.IsBusy Then Worker_SetAlarm.CancelAsync()
         If Worker_Alarm.IsBusy Then Worker_SetAlarm.CancelAsync()
         If AudioPlayer IsNot Nothing Then AudioPlayer.StopPlayback()
@@ -391,6 +473,7 @@ Public Class frm_Main
     End Sub
 
     Private Sub Worker_SetAlarm_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_SetAlarm.DoWork
+        LogInfo("Setting Alarm...")
         Me.Invoke(Sub()
                       WaitDialog.Show(Me)
                       DisableControls()
@@ -399,6 +482,7 @@ Public Class frm_Main
                   End Sub)
         OldList = GetList()
         If OldList IsNot Nothing Then
+            LogInfo("Files Found. Alarm will be set.")
             Me.Invoke(Sub()
                           Timer_Tick.Start()
                           btn_StopAlarm.Enabled = True
@@ -407,6 +491,7 @@ Public Class frm_Main
                           txt_PreviousCount.Text = OldList.Count
                       End Sub)
         Else
+            LogError("Unable to fetch initial list. Alarm will not be set!")
             Me.Invoke(Sub()
                           EnableControls()
                       End Sub)
@@ -475,6 +560,27 @@ Public Class frm_Main
 
 #End Region
 
+#Region "FTP Events"
+
+    Private Sub FTP_CommandSent(sender As Object, e As CommandSentEventArgs) Handles FTP.CommandSent
+        FTPMessages.Add("Command Sent - """ & e.Command & """")
+    End Sub
+
+    Private Sub FTP_ReplyReceived(sender As Object, e As ReplyReceivedEventArgs) Handles FTP.ReplyReceived
+        For i As Integer = 0 To e.Reply.Lines.Count - 1
+            FTPMessages.Add(String.Format("Reply from FTP : {0} - Line {1} - ""{2}""", e.Reply.ReplyCode, i + 1, e.Reply.Lines(i)))
+        Next
+    End Sub
+
+    Private Sub Timer_MessageListener_Tick(sender As Object, e As EventArgs) Handles Timer_MessageListener.Tick
+        If FTPMessages.Count > 0 Then
+            LogFTP(FTPMessages(0))
+            FTPMessages.RemoveAt(0)
+        End If
+    End Sub
+
+#End Region
+
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Licenser.LicenseKey = LicenseKeys.GetXceedFTPKey ' Well I Wish I Could Push the Key to Git. But I Can't... So Specify Your Own Key Here :p
         FTP = New FtpClient
@@ -497,4 +603,12 @@ Public Class frm_Main
         End If
     End Sub
 
+    Private Sub lbl_LogFolder_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbl_LogFolder.LinkClicked
+        Dim LogFolder As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs")
+        If My.Computer.FileSystem.DirectoryExists(LogFolder) Then
+            Process.Start(LogFolder)
+        Else
+            MsgBox("Logs Folder Doesn't Exist for Current User.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
+        End If
+    End Sub
 End Class

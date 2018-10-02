@@ -19,25 +19,14 @@
 '                                                                          '
 '=========================================================================='
 
-Imports Microsoft.VisualBasic.ApplicationServices
+Imports System.Runtime.InteropServices
 
-Namespace My
-    Partial Friend Class MyApplication
-        Private Sub MyApplication_StartupNextInstance(sender As Object, e As StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
-            e.BringToForeground = True
-        End Sub
+Module Native
 
-        Private Sub MyApplication_UnhandledException(sender As Object, e As UnhandledExceptionEventArgs) Handles Me.UnhandledException
-            Dim LogFolder As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs")
-            If Not My.Computer.FileSystem.DirectoryExists(LogFolder) Then My.Computer.FileSystem.CreateDirectory(LogFolder)
-            Dim CrashLog As String = IO.Path.Combine(LogFolder, String.Format("CrashLog_{0}.txt", Now.ToString("ddMMyyyy_hhmmss")))
-            Try
-                Dim Message As String = String.Format("Exception Message : {1}{0}Exception Stack Trace : {2}{0}Exception Source : {3}{0}", vbNewLine, e.Exception.Message, e.Exception.StackTrace, e.Exception.Source)
-                My.Computer.FileSystem.WriteAllText(CrashLog, Message, True)
-            Catch ex As Exception
+    <DllImport("user32.dll")>
+    Public Function PostMessage(ByVal wnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Integer
+    End Function
+    Public Const WM_VSCROLL As UInteger = &H115
+    Public Const SB_BOTTOM As UInteger = 7
 
-            End Try
-        End Sub
-
-    End Class
-End Namespace
+End Module
