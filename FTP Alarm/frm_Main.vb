@@ -79,7 +79,7 @@ Public Class frm_Main
                 Type_ = "E"
                 Color = Color.Red
             Case LogType.FTP
-                Type = "F"
+                Type_ = "F"
                 Color = Color.Blue
         End Select
 
