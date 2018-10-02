@@ -34,6 +34,7 @@ Namespace My
             Try
                 Dim Message As String = String.Format("Exception Message : {1}{0}Exception Stack Trace : {2}{0}Exception Source : {3}{0}", vbNewLine, e.Exception.Message, e.Exception.StackTrace, e.Exception.Source)
                 My.Computer.FileSystem.WriteAllText(CrashLog, Message, True)
+                MsgBox("Unhandled Exception Occured... Please Check Logs for Details.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Error")
             Catch ex As Exception
 
             End Try
