@@ -137,6 +137,7 @@ Public Class frm_Main
 
             Me.txt_Hour.Value = SettingsManager.Settings.IntervalHour
             Me.txt_Minutes.Value = SettingsManager.Settings.IntervalMinutes
+            Me.txt_MaxDepth.Value = SettingsManager.Settings.MaxDepth
             Me.cb_IncludeFiles.Checked = SettingsManager.Settings.IncludeFiles
 
             If My.Computer.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Run").GetValue(My.Application.Info.Title) Is Nothing Then
@@ -165,7 +166,7 @@ Public Class frm_Main
 
             Dim Files As New List(Of String)
 
-            List(FTP, "/", Files, 0, 1)
+            List(FTP, "/", Files, 0, txt_MaxDepth.Value)
 
             FTP.Disconnect()
 
