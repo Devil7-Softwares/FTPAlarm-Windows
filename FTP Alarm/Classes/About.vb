@@ -56,6 +56,12 @@ Public Class About
         ReleasesLink = "https://github.com/Devil7-Softwares/FTPAlarm_Windows/releases"
         WebsiteLink = "https://devil7softwares.github.io"
 
+#If DEBUG Then
+        lbl_BuildType.Text = "Debug"
+#Else
+        lbl_buildType.Text = "Release"
+#End If
+
     End Sub
 
     Private Sub lbl_Email_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lbl_Email.LinkClicked

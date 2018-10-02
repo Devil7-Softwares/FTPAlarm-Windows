@@ -79,6 +79,9 @@ Partial Class About
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.lbl_BuildType = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -134,34 +137,37 @@ Partial Class About
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label8, 0, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label9, 0, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label10, 0, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label11, 0, 7)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label8, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label9, 0, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label10, 0, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label11, 0, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label7, 0, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.Label12, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label13, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label14, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label15, 1, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label16, 1, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label17, 1, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label18, 1, 7)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label19, 1, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label14, 1, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label15, 1, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label16, 1, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label17, 1, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label18, 1, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label19, 1, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.lbl_Version, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lbl_BuildDate, 2, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Source, 2, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.lbl_IssueTracker, 2, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Website, 2, 7)
-        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Downlods, 2, 8)
-        Me.TableLayoutPanel1.Controls.Add(Me.lbl_License, 2, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label6, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Company, 2, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Email, 2, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Source, 2, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_IssueTracker, 2, 7)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Website, 2, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Downlods, 2, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_License, 2, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label6, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Company, 2, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_Email, 2, 4)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label22, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.lbl_BuildType, 2, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label24, 1, 2)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 120)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 9
+        Me.TableLayoutPanel1.RowCount = 10
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
@@ -171,7 +177,8 @@ Partial Class About
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(375, 225)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(375, 250)
         Me.TableLayoutPanel1.TabIndex = 4
         '
         'Label4
@@ -200,7 +207,7 @@ Partial Class About
         '
         Me.Label8.AutoSize = True
         Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label8.Location = New System.Drawing.Point(3, 100)
+        Me.Label8.Location = New System.Drawing.Point(3, 125)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(108, 25)
         Me.Label8.TabIndex = 4
@@ -211,7 +218,7 @@ Partial Class About
         '
         Me.Label9.AutoSize = True
         Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label9.Location = New System.Drawing.Point(3, 125)
+        Me.Label9.Location = New System.Drawing.Point(3, 150)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(108, 25)
         Me.Label9.TabIndex = 5
@@ -222,7 +229,7 @@ Partial Class About
         '
         Me.Label10.AutoSize = True
         Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label10.Location = New System.Drawing.Point(3, 150)
+        Me.Label10.Location = New System.Drawing.Point(3, 175)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(108, 25)
         Me.Label10.TabIndex = 6
@@ -233,7 +240,7 @@ Partial Class About
         '
         Me.Label11.AutoSize = True
         Me.Label11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label11.Location = New System.Drawing.Point(3, 175)
+        Me.Label11.Location = New System.Drawing.Point(3, 200)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(108, 25)
         Me.Label11.TabIndex = 7
@@ -244,7 +251,7 @@ Partial Class About
         '
         Me.Label7.AutoSize = True
         Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label7.Location = New System.Drawing.Point(3, 200)
+        Me.Label7.Location = New System.Drawing.Point(3, 225)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(108, 25)
         Me.Label7.TabIndex = 8
@@ -277,7 +284,7 @@ Partial Class About
         '
         Me.Label14.AutoSize = True
         Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label14.Location = New System.Drawing.Point(117, 75)
+        Me.Label14.Location = New System.Drawing.Point(117, 100)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(10, 25)
         Me.Label14.TabIndex = 9
@@ -288,7 +295,7 @@ Partial Class About
         '
         Me.Label15.AutoSize = True
         Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label15.Location = New System.Drawing.Point(117, 100)
+        Me.Label15.Location = New System.Drawing.Point(117, 125)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(10, 25)
         Me.Label15.TabIndex = 9
@@ -299,7 +306,7 @@ Partial Class About
         '
         Me.Label16.AutoSize = True
         Me.Label16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label16.Location = New System.Drawing.Point(117, 125)
+        Me.Label16.Location = New System.Drawing.Point(117, 150)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(10, 25)
         Me.Label16.TabIndex = 9
@@ -310,7 +317,7 @@ Partial Class About
         '
         Me.Label17.AutoSize = True
         Me.Label17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label17.Location = New System.Drawing.Point(117, 150)
+        Me.Label17.Location = New System.Drawing.Point(117, 175)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(10, 25)
         Me.Label17.TabIndex = 9
@@ -321,7 +328,7 @@ Partial Class About
         '
         Me.Label18.AutoSize = True
         Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label18.Location = New System.Drawing.Point(117, 175)
+        Me.Label18.Location = New System.Drawing.Point(117, 200)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(10, 25)
         Me.Label18.TabIndex = 9
@@ -332,7 +339,7 @@ Partial Class About
         '
         Me.Label19.AutoSize = True
         Me.Label19.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label19.Location = New System.Drawing.Point(117, 200)
+        Me.Label19.Location = New System.Drawing.Point(117, 225)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(10, 25)
         Me.Label19.TabIndex = 9
@@ -365,7 +372,7 @@ Partial Class About
         '
         Me.lbl_Source.AutoSize = True
         Me.lbl_Source.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_Source.Location = New System.Drawing.Point(133, 125)
+        Me.lbl_Source.Location = New System.Drawing.Point(133, 150)
         Me.lbl_Source.Name = "lbl_Source"
         Me.lbl_Source.Size = New System.Drawing.Size(239, 25)
         Me.lbl_Source.TabIndex = 14
@@ -377,7 +384,7 @@ Partial Class About
         '
         Me.lbl_IssueTracker.AutoSize = True
         Me.lbl_IssueTracker.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_IssueTracker.Location = New System.Drawing.Point(133, 150)
+        Me.lbl_IssueTracker.Location = New System.Drawing.Point(133, 175)
         Me.lbl_IssueTracker.Name = "lbl_IssueTracker"
         Me.lbl_IssueTracker.Size = New System.Drawing.Size(239, 25)
         Me.lbl_IssueTracker.TabIndex = 15
@@ -389,7 +396,7 @@ Partial Class About
         '
         Me.lbl_Website.AutoSize = True
         Me.lbl_Website.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_Website.Location = New System.Drawing.Point(133, 175)
+        Me.lbl_Website.Location = New System.Drawing.Point(133, 200)
         Me.lbl_Website.Name = "lbl_Website"
         Me.lbl_Website.Size = New System.Drawing.Size(239, 25)
         Me.lbl_Website.TabIndex = 16
@@ -401,7 +408,7 @@ Partial Class About
         '
         Me.lbl_Downlods.AutoSize = True
         Me.lbl_Downlods.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_Downlods.Location = New System.Drawing.Point(133, 200)
+        Me.lbl_Downlods.Location = New System.Drawing.Point(133, 225)
         Me.lbl_Downlods.Name = "lbl_Downlods"
         Me.lbl_Downlods.Size = New System.Drawing.Size(239, 25)
         Me.lbl_Downlods.TabIndex = 17
@@ -413,7 +420,7 @@ Partial Class About
         '
         Me.lbl_License.AutoSize = True
         Me.lbl_License.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_License.Location = New System.Drawing.Point(133, 100)
+        Me.lbl_License.Location = New System.Drawing.Point(133, 125)
         Me.lbl_License.Name = "lbl_License"
         Me.lbl_License.Size = New System.Drawing.Size(239, 25)
         Me.lbl_License.TabIndex = 18
@@ -425,7 +432,7 @@ Partial Class About
         '
         Me.Label6.AutoSize = True
         Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label6.Location = New System.Drawing.Point(3, 50)
+        Me.Label6.Location = New System.Drawing.Point(3, 75)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(108, 25)
         Me.Label6.TabIndex = 2
@@ -436,7 +443,7 @@ Partial Class About
         '
         Me.Label1.AutoSize = True
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label1.Location = New System.Drawing.Point(117, 50)
+        Me.Label1.Location = New System.Drawing.Point(117, 75)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(10, 25)
         Me.Label1.TabIndex = 9
@@ -447,7 +454,7 @@ Partial Class About
         '
         Me.lbl_Company.AutoSize = True
         Me.lbl_Company.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_Company.Location = New System.Drawing.Point(133, 50)
+        Me.lbl_Company.Location = New System.Drawing.Point(133, 75)
         Me.lbl_Company.Name = "lbl_Company"
         Me.lbl_Company.Size = New System.Drawing.Size(239, 25)
         Me.lbl_Company.TabIndex = 12
@@ -458,7 +465,7 @@ Partial Class About
         '
         Me.Label2.AutoSize = True
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label2.Location = New System.Drawing.Point(3, 75)
+        Me.Label2.Location = New System.Drawing.Point(3, 100)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(108, 25)
         Me.Label2.TabIndex = 19
@@ -469,7 +476,7 @@ Partial Class About
         '
         Me.lbl_Email.AutoSize = True
         Me.lbl_Email.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_Email.Location = New System.Drawing.Point(133, 75)
+        Me.lbl_Email.Location = New System.Drawing.Point(133, 100)
         Me.lbl_Email.Name = "lbl_Email"
         Me.lbl_Email.Size = New System.Drawing.Size(239, 25)
         Me.lbl_Email.TabIndex = 20
@@ -481,7 +488,7 @@ Partial Class About
         '
         Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label3.Location = New System.Drawing.Point(9, 361)
+        Me.Label3.Location = New System.Drawing.Point(9, 386)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(375, 31)
         Me.Label3.TabIndex = 5
@@ -492,7 +499,7 @@ Partial Class About
         '
         Me.Label20.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label20.Location = New System.Drawing.Point(28, 415)
+        Me.Label20.Location = New System.Drawing.Point(28, 440)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(359, 61)
         Me.Label20.TabIndex = 6
@@ -505,11 +512,44 @@ Partial Class About
         Me.Label21.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(9, 399)
+        Me.Label21.Location = New System.Drawing.Point(9, 424)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(72, 13)
         Me.Label21.TabIndex = 7
         Me.Label21.Text = "Disclaimer :"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label22.Location = New System.Drawing.Point(3, 50)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(108, 25)
+        Me.Label22.TabIndex = 21
+        Me.Label22.Text = "Build Type"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lbl_BuildType
+        '
+        Me.lbl_BuildType.AutoSize = True
+        Me.lbl_BuildType.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbl_BuildType.Location = New System.Drawing.Point(133, 50)
+        Me.lbl_BuildType.Name = "lbl_BuildType"
+        Me.lbl_BuildType.Size = New System.Drawing.Size(239, 25)
+        Me.lbl_BuildType.TabIndex = 22
+        Me.lbl_BuildType.Text = "-"
+        Me.lbl_BuildType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label24.Location = New System.Drawing.Point(117, 50)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(10, 25)
+        Me.Label24.TabIndex = 23
+        Me.Label24.Text = ":"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'About
         '
@@ -524,7 +564,7 @@ Partial Class About
         Me.Controls.Add(Me.lbl_ProjectTitle)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "About"
-        Me.Size = New System.Drawing.Size(399, 483)
+        Me.Size = New System.Drawing.Size(399, 508)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
@@ -567,4 +607,7 @@ Partial Class About
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label21 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents lbl_BuildType As Label
+    Friend WithEvents Label24 As Label
 End Class
