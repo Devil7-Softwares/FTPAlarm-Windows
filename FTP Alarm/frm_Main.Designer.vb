@@ -247,7 +247,7 @@ Partial Class frm_Main
         Me.txt_MaxDepth.Location = New System.Drawing.Point(93, 43)
         Me.txt_MaxDepth.Name = "txt_MaxDepth"
         Me.txt_MaxDepth.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txt_MaxDepth.Properties.MaxValue = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.txt_MaxDepth.Properties.MaxValue = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.txt_MaxDepth.Properties.MinValue = New Decimal(New Integer() {1, 0, 0, 0})
         Me.txt_MaxDepth.Size = New System.Drawing.Size(61, 20)
         Me.txt_MaxDepth.TabIndex = 8
@@ -935,7 +935,7 @@ Partial Class frm_Main
         Me.About.Location = New System.Drawing.Point(0, 0)
         Me.About.MinimumSize = New System.Drawing.Size(399, 508)
         Me.About.Name = "About"
-        Me.About.Size = New System.Drawing.Size(434, 508)
+        Me.About.Size = New System.Drawing.Size(451, 508)
         Me.About.TabIndex = 0
         '
         'Timer_Tick
