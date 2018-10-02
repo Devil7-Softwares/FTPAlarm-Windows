@@ -76,12 +76,12 @@ Partial Class About
         Me.lbl_Company = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lbl_Email = New System.Windows.Forms.LinkLabel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.lbl_BuildType = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -484,6 +484,39 @@ Partial Class About
         Me.lbl_Email.Text = "-"
         Me.lbl_Email.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label22.Location = New System.Drawing.Point(3, 50)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(108, 25)
+        Me.Label22.TabIndex = 21
+        Me.Label22.Text = "Build Type"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lbl_BuildType
+        '
+        Me.lbl_BuildType.AutoSize = True
+        Me.lbl_BuildType.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbl_BuildType.Location = New System.Drawing.Point(133, 50)
+        Me.lbl_BuildType.Name = "lbl_BuildType"
+        Me.lbl_BuildType.Size = New System.Drawing.Size(239, 25)
+        Me.lbl_BuildType.TabIndex = 22
+        Me.lbl_BuildType.Text = "-"
+        Me.lbl_BuildType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label24.Location = New System.Drawing.Point(117, 50)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(10, 25)
+        Me.Label24.TabIndex = 23
+        Me.Label24.Text = ":"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Label3
         '
         Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
@@ -518,39 +551,6 @@ Partial Class About
         Me.Label21.TabIndex = 7
         Me.Label21.Text = "Disclaimer :"
         '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label22.Location = New System.Drawing.Point(3, 50)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(108, 25)
-        Me.Label22.TabIndex = 21
-        Me.Label22.Text = "Build Type"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lbl_BuildType
-        '
-        Me.lbl_BuildType.AutoSize = True
-        Me.lbl_BuildType.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbl_BuildType.Location = New System.Drawing.Point(133, 50)
-        Me.lbl_BuildType.Name = "lbl_BuildType"
-        Me.lbl_BuildType.Size = New System.Drawing.Size(239, 25)
-        Me.lbl_BuildType.TabIndex = 22
-        Me.lbl_BuildType.Text = "-"
-        Me.lbl_BuildType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label24.Location = New System.Drawing.Point(117, 50)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(10, 25)
-        Me.Label24.TabIndex = 23
-        Me.Label24.Text = ":"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'About
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -563,6 +563,7 @@ Partial Class About
         Me.Controls.Add(Me.lbl_ApplicationTitle)
         Me.Controls.Add(Me.lbl_ProjectTitle)
         Me.Controls.Add(Me.PictureBox1)
+        Me.MinimumSize = New System.Drawing.Size(399, 508)
         Me.Name = "About"
         Me.Size = New System.Drawing.Size(399, 508)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
