@@ -389,7 +389,7 @@ Public Class frm_Main
                 Else
                     LogWarn("No Changes...")
                     OldList = NewList
-                    Timer_Tick.Start()
+                    Invoke(Sub() Timer_Tick.Start())
                 End If
             End If
         Else
