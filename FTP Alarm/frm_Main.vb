@@ -232,7 +232,11 @@ Public Class frm_Main
     End Sub
 
     Private Sub txt_Port_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Port.EditValueChanged
-        SettingsManager.Settings.Port = txt_Port.EditValue
+        Try
+            SettingsManager.Settings.Port = txt_Port.EditValue
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txt_Username_EditValueChanged(sender As Object, e As EventArgs) Handles txt_Username.EditValueChanged
