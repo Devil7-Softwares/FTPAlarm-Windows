@@ -475,6 +475,21 @@ Public Class frm_Main
         Timer_Tick.Stop()
         WaitDialog.Close()
         EnableControls()
+        My.Settings.AlarmCount += 1
+        My.Settings.Save()
+        If (My.Settings.AlarmCount Mod 5) = 0 Then
+            If Not My.Settings.FeedbackShown Then
+                Dim Result = MsgBox("Every single feedback from users mean a lot to us. Would you mind to spare a minute to write a feedback to us...?" & vbNewLine & vbNewLine & "Click 'No' to never show this dialog again.", MsgBoxStyle.Question + MsgBoxStyle.YesNoCancel, "Feedback")
+                If Result = MsgBoxResult.Yes Then
+                    Me.Invoke(Sub() btn_Feedback.PerformClick())
+                    My.Settings.FeedbackShown = True
+                    My.Settings.Save()
+                ElseIf Result = MsgBoxResult.No Then
+                    My.Settings.FeedbackShown = True
+                    My.Settings.Save()
+                End If
+            End If
+        End If
     End Sub
 
     Private Sub Worker_SetAlarm_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_SetAlarm.DoWork
