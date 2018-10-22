@@ -18,10 +18,10 @@
     <ROW Property="ARPPRODUCTICON" Value="icon.exe" Type="8"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Devil7 Softwares"/>
-    <ROW Property="ProductCode" Value="1033:{0F481098-C543-4DEA-BC3F-D2788DC69C6D} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{A8C7848D-C6D0-40D3-81B5-59EDDCD2917E} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="FTP Alarm"/>
-    <ROW Property="ProductVersion" Value="2.0.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="2.1.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{C3AF5876-F94F-479F-B6A9-BAC6A7229BC5}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
