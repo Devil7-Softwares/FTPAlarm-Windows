@@ -127,6 +127,7 @@ Partial Class frm_Main
         Me.OpenAudio = New System.Windows.Forms.OpenFileDialog()
         Me.Worker_SetAlarm = New System.ComponentModel.BackgroundWorker()
         Me.Timer_MessageListener = New System.Windows.Forms.Timer(Me.components)
+        Me.btn_Feedback = New DevExpress.XtraEditors.SimpleButton()
         CType(Me.MainPane, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MainPane.SuspendLayout()
         Me.tp_Alarm.SuspendLayout()
@@ -865,6 +866,7 @@ Partial Class frm_Main
         '
         'grp_General
         '
+        Me.grp_General.Controls.Add(Me.btn_Feedback)
         Me.grp_General.Controls.Add(Me.lbl_LogFolder)
         Me.grp_General.Controls.Add(Me.lbl_AutoSetAlarm)
         Me.grp_General.Controls.Add(Me.toggle_AutoSetAlarm)
@@ -965,6 +967,15 @@ Partial Class frm_Main
         '
         Me.Timer_MessageListener.Enabled = True
         Me.Timer_MessageListener.Interval = 1
+        '
+        'btn_Feedback
+        '
+        Me.btn_Feedback.Location = New System.Drawing.Point(343, 48)
+        Me.btn_Feedback.Name = "btn_Feedback"
+        Me.btn_Feedback.Size = New System.Drawing.Size(83, 32)
+        Me.btn_Feedback.TabIndex = 4
+        Me.btn_Feedback.Text = "Feedback/" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Support"
+        '
         '
         'frm_Main
         '
@@ -1115,4 +1126,5 @@ Partial Class frm_Main
     Friend WithEvents toggle_AutoSetAlarm As DevExpress.XtraEditors.ToggleSwitch
     Friend WithEvents Timer_MessageListener As Timer
     Friend WithEvents lbl_LogFolder As LinkLabel
+    Friend WithEvents btn_Feedback As DevExpress.XtraEditors.SimpleButton
 End Class

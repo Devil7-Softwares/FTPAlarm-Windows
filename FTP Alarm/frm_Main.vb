@@ -616,4 +616,11 @@ Public Class frm_Main
             MsgBox("Logs Folder Doesn't Exist for Current User.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
         End If
     End Sub
+
+    Private Sub btn_Feedback_Click(sender As Object, e As EventArgs) Handles btn_Feedback.Click
+        Dim d As New frm_Feedback
+        d.ShowDialog()
+        Me.BringToFront()
+        Me.Focus()
+    End Sub
 End Class

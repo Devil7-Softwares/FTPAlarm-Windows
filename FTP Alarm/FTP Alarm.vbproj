@@ -93,6 +93,13 @@
     <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.1\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net46\System.Security.Cryptography.Algorithms.dll</HintPath>
     </Reference>
@@ -106,6 +113,7 @@
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net46\System.Security.Cryptography.X509Certificates.dll</HintPath>
     </Reference>
     <Reference Include="System.Speech" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -135,9 +143,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Classes\Encryption.vb" />
+    <Compile Include="Classes\Feedback.vb" />
     <Compile Include="Classes\libZPlay.vb" />
     <Compile Include="Classes\LicenseKeys.vb" />
     <Compile Include="Classes\Native.vb" />
+    <Compile Include="Classes\PublicFunctions.vb" />
+    <Compile Include="Classes\RestAPI.vb" />
     <Compile Include="Classes\Settings.vb" />
     <Compile Include="Classes\SettingsManager.vb" />
     <Compile Include="Classes\Speech.vb">
@@ -145,6 +156,12 @@
     </Compile>
     <Compile Include="Classes\TimeLabel.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="frm_Feedback.designer.vb">
+      <DependentUpon>frm_Feedback.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Feedback.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_Main.vb">
       <SubType>Form</SubType>
@@ -157,6 +174,12 @@
       <DependentUpon>frm_Splash.vb</DependentUpon>
     </Compile>
     <Compile Include="frm_Splash.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Wait.designer.vb">
+      <DependentUpon>frm_Wait.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Wait.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -188,11 +211,17 @@
     <EmbeddedResource Include="Classes\About.resx">
       <DependentUpon>About.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_Feedback.resx">
+      <DependentUpon>frm_Feedback.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Main.resx">
       <DependentUpon>frm_Main.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Splash.resx">
       <DependentUpon>frm_Splash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Wait.resx">
+      <DependentUpon>frm_Wait.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -245,4 +274,9 @@
   <PropertyGroup>
     <PreBuildEvent>break &gt; "$(ProjectDir)My Project\licenses.licx"</PreBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>
