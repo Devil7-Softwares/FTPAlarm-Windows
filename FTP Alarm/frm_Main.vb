@@ -40,6 +40,7 @@ Public Class frm_Main
     Dim AlarmThread As Threading.Thread
 
     Dim Loaded As Boolean = False
+    Dim Cancelled As Boolean = False
 
     Dim LogMessages As New List(Of LogMessage)
 
@@ -201,6 +202,7 @@ Public Class frm_Main
         btn_SetAlarm.Enabled = False
         tp_Settings.Enabled = False
         btn_StopAlarm.Enabled = True
+        Cancelled = False
     End Sub
 
     Sub EnableControls()
@@ -212,6 +214,7 @@ Public Class frm_Main
         tp_Settings.Enabled = True
         tp_About.Enabled = True
         btn_StopAlarm.Enabled = False
+        Cancelled = True
     End Sub
 
     Function ConnectionAvailable() As Boolean
@@ -384,20 +387,23 @@ Public Class frm_Main
                     LogWarn("Changed Detected... Triggering Events...")
                     LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; New.Except(Old) = {1};", C1.Count, String.Join(",", C1)))
                     LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; Old.Except(New) = {1};", C2.Count, String.Join(",", C2)))
-                    AudioPlayer = New ZPlay
-                    AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
-                    AlarmThread.Start()
+                    If Not Cancelled Then
+                        AudioPlayer = New ZPlay
+                        AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
+                        AlarmThread.Start()
+                    End If
                 Else
-                    LogWarn("No Changes...")
-                    OldList = NewList
-                    Invoke(Sub() Timer_Tick.Start())
+                    If Not Cancelled Then
+                        LogWarn("No Changes...")
+                        OldList = NewList
+                        Invoke(Sub() Timer_Tick.Start())
+                    End If
                 End If
             End If
         Else
             LogWarn("No Connection Available. Aborting...")
             Timer_Tick.Start()
         End If
-
     End Sub
 
     Sub TriggerAlarm()
@@ -410,13 +416,13 @@ Public Class frm_Main
                       End Sub)
 
             ' Email Notification
-            If SettingsManager.Settings.EmailNotification Then
+            If SettingsManager.Settings.EmailNotification AndAlso Not Cancelled Then
                 Dim th1 As New Threading.Thread(AddressOf EmailNotification)
                 th1.Start()
             End If
 
             ' Voice Notification
-            If SettingsManager.Settings.VoiceNotification Then
+            If SettingsManager.Settings.VoiceNotification AndAlso Not Cancelled Then
                 Dim S As String = ""
                 For i As Integer = 1 To SettingsManager.Settings.VoiceMessageLoop
                     S &= SettingsManager.Settings.VoiceMessage & " "
@@ -429,20 +435,22 @@ Public Class frm_Main
             End If
 
             ' Ringtone Notification
-            If SettingsManager.Settings.RingtoneNotification AndAlso AudioPlayer IsNot Nothing Then
+            If (SettingsManager.Settings.RingtoneNotification AndAlso AudioPlayer IsNot Nothing) AndAlso Not Cancelled Then
                 Dim AudioFile As String = IO.Path.Combine(Application.StartupPath, txt_RingTone.Text)
                 If My.Computer.FileSystem.FileExists(AudioFile) Then
                     AudioPlayer.OpenFile(AudioFile, TStreamFormat.sfAutodetect)
                 Else
                     AudioPlayer.OpenFile(IO.Path.Combine(Application.StartupPath, "Ringtone.wav"), TStreamFormat.sfAutodetect)
                 End If
-                Do Until 1 = 0
+                Do Until (1 = 0 Or Cancelled)
                     Dim t As New TStreamStatus
                     AudioPlayer.GetStatus(t)
                     If t.fPlay = False Then
                         AudioPlayer.StartPlayback()
                     End If
                 Loop
+            Else
+                Invoke(Sub() btn_StopAlarm.PerformClick())
             End If
         Catch ex As Exception
             LogError("TriggerAlarm", ex)
@@ -459,11 +467,11 @@ Public Class frm_Main
 
     Private Sub btn_StopAlarm_Click(sender As Object, e As EventArgs) Handles btn_StopAlarm.Click
         LogInfo("Stopping Alarm...")
+        Cancelled = True
         If Worker_SetAlarm.IsBusy Then Worker_SetAlarm.CancelAsync()
         If Worker_Alarm.IsBusy Then Worker_SetAlarm.CancelAsync()
         If AudioPlayer IsNot Nothing Then AudioPlayer.StopPlayback()
         AudioPlayer = Nothing
-        If AlarmThread IsNot Nothing Then AlarmThread.Abort()
         If Speech_Manager.isSpeaking Then
             Speech_Manager.StopAll()
         End If
