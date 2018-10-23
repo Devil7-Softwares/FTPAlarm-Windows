@@ -387,6 +387,8 @@ Public Class frm_Main
                 Dim C2 As IEnumerable(Of String) = OldList.Except(NewList)
                 If C1.Count > 0 Or C2.Count > 0 Then
                     LogWarn("Changed Detected... Triggering Events...")
+                    LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; New.Except(Old) = {1};", C1.Count, String.Join(",", C1)))
+                    LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; Old.Except(New) = {1};", C2.Count, String.Join(",", C2)))
                     AudioPlayer = New ZPlay
                     AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
                     AlarmThread.Start()
