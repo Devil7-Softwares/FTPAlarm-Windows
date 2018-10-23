@@ -83,7 +83,7 @@ Public Class frm_Main
                 Color = Color.Blue
         End Select
 
-        Dim S As String = String.Format("{2}{0}{3}{0}{4}{1}", vbTab, vbNewLine, Now.ToString("dd-MM-yyyy_hh:mm:ss"), Type_, Message)
+        Dim S As String = String.Format("{2}{0}{3}{0}{4}{1}", vbTab, vbNewLine, Now.ToString("dd-MM-yyyy_hh:mm:ss_tt"), Type_, Message)
         My.Computer.FileSystem.WriteAllText(LogFile, S, True)
         Write2Console(S, Color)
     End Sub
