@@ -36,7 +36,7 @@ Public Class Settings
     Property Ringtone As String = "Default"
     Property IncludeFiles As Boolean = False
     Property MaxDepth As Integer = 2
-    Property VoiceMessageLoop As Integer = 2
+    Property VoiceMessageLoop As Integer = 6
     Property MailMessage As String = "Alert...! A File/Directory Has Been Created/Modified in Your Given FTP Server."
     Property AutoSetAlarm As Boolean = False
 
