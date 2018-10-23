@@ -41,7 +41,7 @@ Public Class frm_Main
 
     Dim Loaded As Boolean = False
 
-    Dim FTPMessages As New List(Of String)
+    Dim LogMessages As New List(Of LogMessage)
 
 #Region "Logging"
     Private ReadOnly LogFile As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs", "Log_" & Now.ToString("ddMMyyyy_hhmmss") & ".txt")
@@ -52,6 +52,22 @@ Public Class frm_Main
         Err = 2
         FTP = 3
     End Enum
+
+    Public Class LogMessage
+
+#Region "Properties"
+        Property LogType As LogType
+        Property LogMessage As String
+#End Region
+
+#Region "Constructors"
+        Sub New(ByVal LogType As LogType, ByVal LogMessage As String)
+            Me.LogType = LogType
+            Me.LogMessage = LogMessage
+        End Sub
+#End Region
+
+    End Class
 
     Public Sub Write2Console(ByVal Text As String, ByVal Color As Color)
         If InvokeRequired Then
@@ -64,28 +80,7 @@ Public Class frm_Main
     End Sub
 
     Sub Log(ByVal Type As LogType, ByVal Message As String)
-        Dim LogFolder As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs")
-        If Not My.Computer.FileSystem.DirectoryExists(LogFolder) Then My.Computer.FileSystem.CreateDirectory(LogFolder)
-        Dim Type_ As String = "I"
-        Dim Color As Color = Color.Green
-        Select Case Type
-            Case LogType.Info
-                Type_ = "I"
-                Color = Color.Green
-            Case LogType.Warn
-                Type_ = "W"
-                Color = Color.Yellow
-            Case LogType.Err
-                Type_ = "E"
-                Color = Color.Red
-            Case LogType.FTP
-                Type_ = "F"
-                Color = Color.Blue
-        End Select
-
-        Dim S As String = String.Format("{2}{0}{3}{0}{4}{1}", vbTab, vbNewLine, Now.ToString("dd-MM-yyyy_hh:mm:ss_tt"), Type_, Message)
-        My.Computer.FileSystem.WriteAllText(LogFile, S, True)
-        Write2Console(S, Color)
+        LogMessages.Add(New LogMessage(Type, Message))
     End Sub
 
     Sub LogInfo(ByVal Message As String)
@@ -585,19 +580,41 @@ Public Class frm_Main
 #Region "FTP Events"
 
     Private Sub FTP_CommandSent(sender As Object, e As CommandSentEventArgs) Handles FTP.CommandSent
-        FTPMessages.Add("Command Sent - """ & e.Command & """")
+        LogFTP("Command Sent - """ & e.Command & """")
     End Sub
 
     Private Sub FTP_ReplyReceived(sender As Object, e As ReplyReceivedEventArgs) Handles FTP.ReplyReceived
         For i As Integer = 0 To e.Reply.Lines.Count - 1
-            FTPMessages.Add(String.Format("Reply from FTP : {0} - Line {1} - ""{2}""", e.Reply.ReplyCode, i + 1, e.Reply.Lines(i)))
+            LogFTP(String.Format("Reply from FTP : {0} - Line {1} - ""{2}""", e.Reply.ReplyCode, i + 1, e.Reply.Lines(i)))
         Next
     End Sub
 
     Private Sub Timer_MessageListener_Tick(sender As Object, e As EventArgs) Handles Timer_MessageListener.Tick
-        If FTPMessages.Count > 0 Then
-            LogFTP(FTPMessages(0))
-            FTPMessages.RemoveAt(0)
+        If LogMessages.Count > 0 Then
+            Dim LogMessage As LogMessage = LogMessages(0)
+            Dim LogFolder As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs")
+            If Not My.Computer.FileSystem.DirectoryExists(LogFolder) Then My.Computer.FileSystem.CreateDirectory(LogFolder)
+            Dim Type_ As String = "I"
+            Dim Color As Color = Color.Green
+            Select Case LogMessage.LogType
+                Case LogType.Info
+                    Type_ = "I"
+                    Color = Color.Green
+                Case LogType.Warn
+                    Type_ = "W"
+                    Color = Color.Yellow
+                Case LogType.Err
+                    Type_ = "E"
+                    Color = Color.Red
+                Case LogType.FTP
+                    Type_ = "F"
+                    Color = Color.Blue
+            End Select
+
+            Dim S As String = String.Format("{2}{0}{3}{0}{4}{1}", vbTab, vbNewLine, Now.ToString("dd-MM-yyyy_hh:mm:ss_tt"), Type_, LogMessage.LogMessage)
+            My.Computer.FileSystem.WriteAllText(LogFile, S, True)
+            Write2Console(S, Color)
+            LogMessages.RemoveAt(0)
         End If
     End Sub
 
