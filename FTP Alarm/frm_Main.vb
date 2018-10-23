@@ -38,6 +38,7 @@ Public Class frm_Main
     Dim OldList As List(Of String)
     Dim AudioPlayer As ZPlay
     Dim AlarmThread As Threading.Thread
+    Dim VoiceMessage As String = "Alert. A New file has been created. Alert. A New File has been created."
 
     Dim Loaded As Boolean = False
     Dim Cancelled As Boolean = False
@@ -126,7 +127,6 @@ Public Class frm_Main
             Me.txt_EmailMessage.EditValue = SettingsManager.Settings.MailMessage
 
             If SettingsManager.Settings.Voice <> "" Then Me.cmb_Voice.EditValue = SettingsManager.Settings.Voice
-            Me.txt_VoiceMessage.EditValue = SettingsManager.Settings.VoiceMessage
             Me.txt_Loop.Value = SettingsManager.Settings.VoiceMessageLoop
 
             Me.txt_RingTone.EditValue = SettingsManager.Settings.Ringtone
@@ -290,10 +290,6 @@ Public Class frm_Main
         SettingsManager.Settings.MailMessage = txt_EmailMessage.EditValue
     End Sub
 
-    Private Sub txt_VoiceMessage_EditValueChanged(sender As Object, e As EventArgs) Handles txt_VoiceMessage.EditValueChanged
-        SettingsManager.Settings.VoiceMessage = txt_VoiceMessage.EditValue
-    End Sub
-
     Private Sub txt_Loop_ValueChanged(sender As Object, e As EventArgs) Handles txt_Loop.ValueChanged
         SettingsManager.Settings.VoiceMessageLoop = txt_Loop.Value
     End Sub
@@ -385,8 +381,13 @@ Public Class frm_Main
                 Dim C2 As IEnumerable(Of String) = OldList.Except(NewList)
                 If C1.Count > 0 Or C2.Count > 0 Then
                     LogWarn("Changed Detected... Triggering Events...")
-                    LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; New.Except(Old) = {1};", C1.Count, String.Join(",", C1)))
-                    LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; Old.Except(New) = {1};", C2.Count, String.Join(",", C2)))
+                    If C1.Count > 0 Then
+                        LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; New.Except(Old) = {1};", C1.Count, String.Join(",", C1)))
+                        VoiceMessage = String.Format("Alert. {0} new file{1} or folder{1} has been created.", C1.Count, If(C1.Count > 1, "s", ""))
+                    ElseIf C2.Count > 0 Then
+                        LogWarn(String.Format("Detected Changes : No. Of Changes = {0}; Old.Except(New) = {1};", C2.Count, String.Join(",", C2)))
+                        VoiceMessage = String.Format("Alert. {0} file{1} or folder{1} has been deleted.", C2.Count, If(C2.Count > 1, "s", ""))
+                    End If
                     If Not Cancelled Then
                         AudioPlayer = New ZPlay
                         AlarmThread = New Threading.Thread(AddressOf TriggerAlarm)
@@ -425,7 +426,7 @@ Public Class frm_Main
             If SettingsManager.Settings.VoiceNotification AndAlso Not Cancelled Then
                 Dim S As String = ""
                 For i As Integer = 1 To SettingsManager.Settings.VoiceMessageLoop
-                    S &= SettingsManager.Settings.VoiceMessage & " "
+                    S &= VoiceMessage & " "
                 Next
                 Speech_Manager.Start(S.Trim)
                 Threading.Thread.Sleep(2000)

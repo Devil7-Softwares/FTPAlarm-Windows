@@ -76,8 +76,6 @@ Partial Class frm_Main
         Me.grp_Voice = New DevExpress.XtraEditors.GroupControl()
         Me.txt_Loop = New DevExpress.XtraEditors.SpinEdit()
         Me.lbl_Loop = New DevExpress.XtraEditors.LabelControl()
-        Me.txt_VoiceMessage = New DevExpress.XtraEditors.TextEdit()
-        Me.LabelControl1 = New DevExpress.XtraEditors.LabelControl()
         Me.btn_TestVoice = New DevExpress.XtraEditors.SimpleButton()
         Me.lbl_Voice = New DevExpress.XtraEditors.LabelControl()
         Me.cmb_Voice = New DevExpress.XtraEditors.ComboBoxEdit()
@@ -146,7 +144,6 @@ Partial Class frm_Main
         CType(Me.grp_Voice, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Voice.SuspendLayout()
         CType(Me.txt_Loop.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt_VoiceMessage.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cmb_Voice.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grp_Email, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_Email.SuspendLayout()
@@ -470,8 +467,6 @@ Partial Class frm_Main
         '
         Me.grp_Voice.Controls.Add(Me.txt_Loop)
         Me.grp_Voice.Controls.Add(Me.lbl_Loop)
-        Me.grp_Voice.Controls.Add(Me.txt_VoiceMessage)
-        Me.grp_Voice.Controls.Add(Me.LabelControl1)
         Me.grp_Voice.Controls.Add(Me.btn_TestVoice)
         Me.grp_Voice.Controls.Add(Me.lbl_Voice)
         Me.grp_Voice.Controls.Add(Me.cmb_Voice)
@@ -485,43 +480,26 @@ Partial Class frm_Main
         'txt_Loop
         '
         Me.txt_Loop.EditValue = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.txt_Loop.Location = New System.Drawing.Point(354, 51)
+        Me.txt_Loop.Location = New System.Drawing.Point(63, 51)
         Me.txt_Loop.Name = "txt_Loop"
         Me.txt_Loop.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.txt_Loop.Size = New System.Drawing.Size(75, 20)
+        Me.txt_Loop.Size = New System.Drawing.Size(285, 20)
         Me.txt_Loop.TabIndex = 10
         '
         'lbl_Loop
         '
-        Me.lbl_Loop.Location = New System.Drawing.Point(318, 54)
+        Me.lbl_Loop.Location = New System.Drawing.Point(27, 54)
         Me.lbl_Loop.Name = "lbl_Loop"
         Me.lbl_Loop.Size = New System.Drawing.Size(30, 13)
         Me.lbl_Loop.TabIndex = 9
         Me.lbl_Loop.Text = "Loop :"
-        '
-        'txt_VoiceMessage
-        '
-        Me.txt_VoiceMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txt_VoiceMessage.Location = New System.Drawing.Point(63, 51)
-        Me.txt_VoiceMessage.Name = "txt_VoiceMessage"
-        Me.txt_VoiceMessage.Size = New System.Drawing.Size(249, 20)
-        Me.txt_VoiceMessage.TabIndex = 4
-        '
-        'LabelControl1
-        '
-        Me.LabelControl1.Location = New System.Drawing.Point(8, 54)
-        Me.LabelControl1.Name = "LabelControl1"
-        Me.LabelControl1.Size = New System.Drawing.Size(49, 13)
-        Me.LabelControl1.TabIndex = 3
-        Me.LabelControl1.Text = "Message :"
         '
         'btn_TestVoice
         '
         Me.btn_TestVoice.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_TestVoice.Location = New System.Drawing.Point(354, 23)
         Me.btn_TestVoice.Name = "btn_TestVoice"
-        Me.btn_TestVoice.Size = New System.Drawing.Size(75, 23)
+        Me.btn_TestVoice.Size = New System.Drawing.Size(75, 48)
         Me.btn_TestVoice.TabIndex = 2
         Me.btn_TestVoice.Text = "Test"
         '
@@ -1008,7 +986,6 @@ Partial Class frm_Main
         Me.grp_Voice.ResumeLayout(False)
         Me.grp_Voice.PerformLayout()
         CType(Me.txt_Loop.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt_VoiceMessage.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cmb_Voice.Properties, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grp_Email, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_Email.ResumeLayout(False)
@@ -1112,8 +1089,6 @@ Partial Class frm_Main
     Friend WithEvents Speech_Manager As Speech
     Friend WithEvents OpenAudio As OpenFileDialog
     Friend WithEvents Worker_SetAlarm As System.ComponentModel.BackgroundWorker
-    Friend WithEvents txt_VoiceMessage As DevExpress.XtraEditors.TextEdit
-    Friend WithEvents LabelControl1 As DevExpress.XtraEditors.LabelControl
     Friend WithEvents lbl_EmailMessage As DevExpress.XtraEditors.LabelControl
     Friend WithEvents txt_EmailMessage As DevExpress.XtraEditors.TextEdit
     Friend WithEvents txt_Loop As DevExpress.XtraEditors.SpinEdit
