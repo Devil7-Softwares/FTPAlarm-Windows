@@ -630,7 +630,17 @@ Public Class frm_Main
             End Select
 
             Dim S As String = String.Format("{2}{0}{3}{0}{4}{1}", vbTab, vbNewLine, Now.ToString("dd-MM-yyyy_hh:mm:ss_tt"), Type_, LogMessage.LogMessage)
-            My.Computer.FileSystem.WriteAllText(LogFile, S, True)
+            Dim Tries As Integer = 0
+WriteLog:
+            Try
+                Tries += 1
+                My.Computer.FileSystem.WriteAllText(LogFile, S, True)
+            Catch ex As Exception
+                If Tries <= 3 Then
+                    Threading.Thread.Sleep(500)
+                    GoTo WriteLog
+                End If
+            End Try
             Write2Console(S, Color)
             LogMessages.RemoveAt(0)
         End If
