@@ -21,6 +21,16 @@
 
 Public Class frm_Feedback
 
+    Dim OverlayHandle As DevExpress.XtraSplashScreen.IOverlaySplashScreenHandle
+
+    Private Sub ShowProgressPanel()
+        Me.OverlayHandle = DevExpress.XtraSplashScreen.SplashScreenManager.ShowOverlayForm(Me)
+    End Sub
+
+    Private Sub CloseProgressPanel()
+        If Me.OverlayHandle IsNot Nothing Then DevExpress.XtraSplashScreen.SplashScreenManager.CloseOverlayForm(Me.OverlayHandle)
+    End Sub
+
     Private Sub btn_Send_Click(sender As Object, e As EventArgs) Handles btn_Send.Click
         If Not FeedbackSender.IsBusy Then FeedbackSender.RunWorkerAsync()
     End Sub
@@ -30,7 +40,6 @@ Public Class frm_Feedback
     End Function
 
     Private Sub FeedbackSender_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles FeedbackSender.DoWork
-        Dim f As New frm_Wait(New Point(Me.Location.X + ((Me.Width - 246) / 2), Me.Location.Y + ((Me.Height - 73) / 2)))
         If txt_Name.Text.Trim = "" Then
             MsgBox("'Full Name' cannot be empty.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "Error")
             txt_Name.Focus()
@@ -40,11 +49,11 @@ Public Class frm_Feedback
         Else
             Me.Invoke(Sub()
                           Me.Enabled = False
-                          f.Show(Me)
+                          ShowProgressPanel()
                       End Sub)
             If RestAPI.PostFeedback(New FeedBack(My.Application.Info.AssemblyName, My.Application.Info.Version.ToString, RetrieveLinkerTimestamp, txt_Name.Text.Trim, txt_Email.Text.Trim, txt_Rating.Rating, txt_Message.Text.Trim)) Then
                 Me.Invoke(Sub()
-                              f.Close()
+                              CloseProgressPanel()
                               Me.DialogResult = DialogResult.OK
                               Me.Close()
                           End Sub)
@@ -52,7 +61,7 @@ Public Class frm_Feedback
                 Me.Invoke(Sub()
                               Try
                                   Me.Enabled = True
-                                  f.Close()
+                                  CloseProgressPanel()
                               Catch ex As Exception
                               End Try
                           End Sub)

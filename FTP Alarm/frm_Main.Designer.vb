@@ -173,7 +173,6 @@ Partial Class frm_Main
         '
         'MainPane
         '
-        Me.MainPane.AllowCollapse = DevExpress.Utils.DefaultBoolean.[Default]
         Me.MainPane.Controls.Add(Me.tp_Alarm)
         Me.MainPane.Controls.Add(Me.tp_Settings)
         Me.MainPane.Controls.Add(Me.tp_About)
@@ -202,7 +201,7 @@ Partial Class frm_Main
         Me.tp_Alarm.Controls.Add(Me.grp_Status)
         Me.tp_Alarm.Controls.Add(Me.lbl_AlarmInterval)
         Me.tp_Alarm.Name = "tp_Alarm"
-        Me.tp_Alarm.Size = New System.Drawing.Size(451, 295)
+        Me.tp_Alarm.Size = New System.Drawing.Size(451, 293)
         '
         'grp_FTPConsole
         '
@@ -212,7 +211,7 @@ Partial Class frm_Main
         Me.grp_FTPConsole.Controls.Add(Me.txt_Console)
         Me.grp_FTPConsole.Location = New System.Drawing.Point(12, 164)
         Me.grp_FTPConsole.Name = "grp_FTPConsole"
-        Me.grp_FTPConsole.Size = New System.Drawing.Size(429, 120)
+        Me.grp_FTPConsole.Size = New System.Drawing.Size(429, 118)
         Me.grp_FTPConsole.TabIndex = 10
         Me.grp_FTPConsole.Text = "Console"
         '
@@ -222,11 +221,11 @@ Partial Class frm_Main
         Me.txt_Console.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txt_Console.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txt_Console.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.txt_Console.Location = New System.Drawing.Point(2, 20)
+        Me.txt_Console.Location = New System.Drawing.Point(2, 23)
         Me.txt_Console.Name = "txt_Console"
         Me.txt_Console.ReadOnly = True
         Me.txt_Console.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.txt_Console.Size = New System.Drawing.Size(425, 98)
+        Me.txt_Console.Size = New System.Drawing.Size(425, 93)
         Me.txt_Console.TabIndex = 0
         Me.txt_Console.Text = ""
         Me.txt_Console.WordWrap = False
@@ -236,7 +235,7 @@ Partial Class frm_Main
         Me.cb_IncludeFiles.Location = New System.Drawing.Point(160, 44)
         Me.cb_IncludeFiles.Name = "cb_IncludeFiles"
         Me.cb_IncludeFiles.Properties.Caption = "Include Files"
-        Me.cb_IncludeFiles.Size = New System.Drawing.Size(95, 19)
+        Me.cb_IncludeFiles.Size = New System.Drawing.Size(95, 20)
         Me.cb_IncludeFiles.TabIndex = 9
         '
         'txt_MaxDepth
@@ -411,7 +410,7 @@ Partial Class frm_Main
         Me.tp_Settings.Controls.Add(Me.grp_Credentials)
         Me.tp_Settings.Controls.Add(Me.grp_General)
         Me.tp_Settings.Name = "tp_Settings"
-        Me.tp_Settings.Size = New System.Drawing.Size(451, 295)
+        Me.tp_Settings.Size = New System.Drawing.Size(451, 293)
         '
         'grp_Ringtone
         '
@@ -639,7 +638,7 @@ Partial Class frm_Main
         Me.toggle_Voice.Name = "toggle_Voice"
         Me.toggle_Voice.Properties.OffText = "Off"
         Me.toggle_Voice.Properties.OnText = "On"
-        Me.toggle_Voice.Size = New System.Drawing.Size(95, 24)
+        Me.toggle_Voice.Size = New System.Drawing.Size(95, 18)
         Me.toggle_Voice.TabIndex = 4
         '
         'toggle_Email
@@ -648,7 +647,7 @@ Partial Class frm_Main
         Me.toggle_Email.Name = "toggle_Email"
         Me.toggle_Email.Properties.OffText = "Off"
         Me.toggle_Email.Properties.OnText = "On"
-        Me.toggle_Email.Size = New System.Drawing.Size(95, 24)
+        Me.toggle_Email.Size = New System.Drawing.Size(95, 18)
         Me.toggle_Email.TabIndex = 3
         '
         'toggle_Ringtone
@@ -657,7 +656,7 @@ Partial Class frm_Main
         Me.toggle_Ringtone.Name = "toggle_Ringtone"
         Me.toggle_Ringtone.Properties.OffText = "Off"
         Me.toggle_Ringtone.Properties.OnText = "On"
-        Me.toggle_Ringtone.Size = New System.Drawing.Size(95, 24)
+        Me.toggle_Ringtone.Size = New System.Drawing.Size(95, 18)
         Me.toggle_Ringtone.TabIndex = 2
         '
         'lbl_Ringtone1
@@ -694,11 +693,11 @@ Partial Class frm_Main
         Me.table_FTPMain.Controls.Add(Me.table_FTPSub_2, 1, 0)
         Me.table_FTPMain.Controls.Add(Me.table_FTPSub_1, 0, 0)
         Me.table_FTPMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.table_FTPMain.Location = New System.Drawing.Point(2, 20)
+        Me.table_FTPMain.Location = New System.Drawing.Point(2, 23)
         Me.table_FTPMain.Name = "table_FTPMain"
         Me.table_FTPMain.RowCount = 1
         Me.table_FTPMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.table_FTPMain.Size = New System.Drawing.Size(430, 55)
+        Me.table_FTPMain.Size = New System.Drawing.Size(430, 52)
         Me.table_FTPMain.TabIndex = 0
         '
         'table_FTPSub_2
@@ -719,7 +718,7 @@ Partial Class frm_Main
         Me.table_FTPSub_2.RowCount = 2
         Me.table_FTPSub_2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.table_FTPSub_2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.table_FTPSub_2.Size = New System.Drawing.Size(209, 49)
+        Me.table_FTPSub_2.Size = New System.Drawing.Size(209, 46)
         Me.table_FTPSub_2.TabIndex = 1
         '
         'lbl_Username
@@ -732,7 +731,7 @@ Partial Class frm_Main
         '
         'lbl_Password
         '
-        Me.lbl_Password.Location = New System.Drawing.Point(3, 27)
+        Me.lbl_Password.Location = New System.Drawing.Point(3, 26)
         Me.lbl_Password.Name = "lbl_Password"
         Me.lbl_Password.Size = New System.Drawing.Size(46, 13)
         Me.lbl_Password.TabIndex = 1
@@ -748,7 +747,7 @@ Partial Class frm_Main
         '
         'lbl_Colon4
         '
-        Me.lbl_Colon4.Location = New System.Drawing.Point(57, 27)
+        Me.lbl_Colon4.Location = New System.Drawing.Point(57, 26)
         Me.lbl_Colon4.Name = "lbl_Colon4"
         Me.lbl_Colon4.Size = New System.Drawing.Size(4, 13)
         Me.lbl_Colon4.TabIndex = 2
@@ -765,7 +764,7 @@ Partial Class frm_Main
         'txt_Password
         '
         Me.txt_Password.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txt_Password.Location = New System.Drawing.Point(65, 27)
+        Me.txt_Password.Location = New System.Drawing.Point(65, 26)
         Me.txt_Password.Name = "txt_Password"
         Me.txt_Password.Properties.UseSystemPasswordChar = True
         Me.txt_Password.Size = New System.Drawing.Size(141, 20)
@@ -789,7 +788,7 @@ Partial Class frm_Main
         Me.table_FTPSub_1.RowCount = 2
         Me.table_FTPSub_1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.table_FTPSub_1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.table_FTPSub_1.Size = New System.Drawing.Size(209, 49)
+        Me.table_FTPSub_1.Size = New System.Drawing.Size(209, 46)
         Me.table_FTPSub_1.TabIndex = 0
         '
         'lbl_FTPServer
@@ -802,7 +801,7 @@ Partial Class frm_Main
         '
         'lbl_Port
         '
-        Me.lbl_Port.Location = New System.Drawing.Point(3, 27)
+        Me.lbl_Port.Location = New System.Drawing.Point(3, 26)
         Me.lbl_Port.Name = "lbl_Port"
         Me.lbl_Port.Size = New System.Drawing.Size(20, 13)
         Me.lbl_Port.TabIndex = 1
@@ -818,7 +817,7 @@ Partial Class frm_Main
         '
         'lbl_Colon2
         '
-        Me.lbl_Colon2.Location = New System.Drawing.Point(92, 27)
+        Me.lbl_Colon2.Location = New System.Drawing.Point(92, 26)
         Me.lbl_Colon2.Name = "lbl_Colon2"
         Me.lbl_Colon2.Size = New System.Drawing.Size(4, 13)
         Me.lbl_Colon2.TabIndex = 2
@@ -837,7 +836,7 @@ Partial Class frm_Main
         '
         Me.txt_Port.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txt_Port.EditValue = "21"
-        Me.txt_Port.Location = New System.Drawing.Point(100, 27)
+        Me.txt_Port.Location = New System.Drawing.Point(100, 26)
         Me.txt_Port.Name = "txt_Port"
         Me.txt_Port.Size = New System.Drawing.Size(106, 20)
         Me.txt_Port.TabIndex = 4
@@ -889,7 +888,7 @@ Partial Class frm_Main
         Me.toggle_AutoSetAlarm.Name = "toggle_AutoSetAlarm"
         Me.toggle_AutoSetAlarm.Properties.OffText = "Off"
         Me.toggle_AutoSetAlarm.Properties.OnText = "On"
-        Me.toggle_AutoSetAlarm.Size = New System.Drawing.Size(95, 24)
+        Me.toggle_AutoSetAlarm.Size = New System.Drawing.Size(95, 18)
         Me.toggle_AutoSetAlarm.TabIndex = 1
         '
         'toggle_AutoStartApp
@@ -898,7 +897,7 @@ Partial Class frm_Main
         Me.toggle_AutoStartApp.Name = "toggle_AutoStartApp"
         Me.toggle_AutoStartApp.Properties.OffText = "Off"
         Me.toggle_AutoStartApp.Properties.OnText = "On"
-        Me.toggle_AutoStartApp.Size = New System.Drawing.Size(95, 24)
+        Me.toggle_AutoStartApp.Size = New System.Drawing.Size(95, 18)
         Me.toggle_AutoStartApp.TabIndex = 1
         '
         'lbl_AutoStartApp
@@ -960,7 +959,7 @@ Partial Class frm_Main
         Me.ClientSize = New System.Drawing.Size(451, 322)
         Me.Controls.Add(Me.MainPane)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IconOptions.Icon = CType(resources.GetObject("frm_Main.IconOptions.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frm_Main"
         Me.Text = "Devil7 - FTP Alarm"

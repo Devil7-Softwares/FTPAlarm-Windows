@@ -45,6 +45,8 @@ Public Class frm_Main
 
     Dim LogMessages As New List(Of LogMessage)
 
+    Dim OverlayHandle As DevExpress.XtraSplashScreen.IOverlaySplashScreenHandle
+
 #Region "Logging"
     Private ReadOnly LogFile As String = IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "Logs", "Log_" & Now.ToString("ddMMyyyy_hhmmss") & ".txt")
 
@@ -107,6 +109,13 @@ Public Class frm_Main
 #End Region
 
 #Region "Subs"
+    Private Sub ShowProgressPanel()
+        Me.OverlayHandle = DevExpress.XtraSplashScreen.SplashScreenManager.ShowOverlayForm(Me)
+    End Sub
+
+    Private Sub CloseProgressPanel()
+        If Me.OverlayHandle IsNot Nothing Then DevExpress.XtraSplashScreen.SplashScreenManager.CloseOverlayForm(Me.OverlayHandle)
+    End Sub
 
     Sub LoadSettings()
         Try
@@ -479,7 +488,7 @@ Public Class frm_Main
         txt_Elapsed.Value = 0
         txt_LastChecked.Text = "-"
         Timer_Tick.Stop()
-        WaitDialog.Close()
+        CloseProgressPanel()
         EnableControls()
         My.Settings.AlarmCount += 1
         My.Settings.Save()
@@ -501,7 +510,7 @@ Public Class frm_Main
     Private Sub Worker_SetAlarm_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles Worker_SetAlarm.DoWork
         LogInfo("Setting Alarm...")
         Me.Invoke(Sub()
-                      WaitDialog.Show(Me)
+                      ShowProgressPanel()
                       DisableControls()
                       btn_StopAlarm.Enabled = False
                       tp_About.Enabled = False
@@ -523,7 +532,7 @@ Public Class frm_Main
                       End Sub)
         End If
         Me.Invoke(Sub()
-                      WaitDialog.Close()
+                      CloseProgressPanel()
                   End Sub)
     End Sub
 
