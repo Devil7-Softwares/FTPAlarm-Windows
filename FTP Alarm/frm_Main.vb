@@ -651,6 +651,13 @@ WriteLog:
 
     Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Licenser.LicenseKey = LicenseKeys.GetXceedFTPKey ' Well I Wish I Could Push the Key to Git. But I Can't... So Specify Your Own Key Here :p
+    End Sub
+
+    Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        SettingsManager.SaveSettings()
+    End Sub
+
+    Private Sub frm_Main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FTP = New FtpClient
         Dim Voices As String() = Speech_Manager.GetVoices
         If Voices.Count > 0 Then
@@ -686,13 +693,6 @@ WriteLog:
         End If
 
         LoadSettings()
-    End Sub
-
-    Private Sub frm_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        SettingsManager.SaveSettings()
-    End Sub
-
-    Private Sub frm_Main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Loaded = True
         If SettingsManager.Settings.AutoSetAlarm Then
             btn_SetAlarm.PerformClick()
