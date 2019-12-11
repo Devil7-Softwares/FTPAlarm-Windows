@@ -183,9 +183,9 @@ Partial Class frm_Main
         Me.MainPane.Location = New System.Drawing.Point(0, 0)
         Me.MainPane.Name = "MainPane"
         Me.MainPane.Pages.AddRange(New DevExpress.XtraBars.Navigation.NavigationPageBase() {Me.tp_Alarm, Me.tp_Settings, Me.tp_About})
-        Me.MainPane.RegularSize = New System.Drawing.Size(451, 322)
+        Me.MainPane.RegularSize = New System.Drawing.Size(473, 322)
         Me.MainPane.SelectedPage = Me.tp_Alarm
-        Me.MainPane.Size = New System.Drawing.Size(451, 322)
+        Me.MainPane.Size = New System.Drawing.Size(473, 322)
         Me.MainPane.TabIndex = 1
         '
         'tp_Alarm
@@ -204,7 +204,7 @@ Partial Class frm_Main
         Me.tp_Alarm.Controls.Add(Me.grp_Status)
         Me.tp_Alarm.Controls.Add(Me.lbl_AlarmInterval)
         Me.tp_Alarm.Name = "tp_Alarm"
-        Me.tp_Alarm.Size = New System.Drawing.Size(451, 293)
+        Me.tp_Alarm.Size = New System.Drawing.Size(473, 293)
         '
         'grp_FTPConsole
         '
@@ -214,7 +214,7 @@ Partial Class frm_Main
         Me.grp_FTPConsole.Controls.Add(Me.txt_Console)
         Me.grp_FTPConsole.Location = New System.Drawing.Point(12, 164)
         Me.grp_FTPConsole.Name = "grp_FTPConsole"
-        Me.grp_FTPConsole.Size = New System.Drawing.Size(429, 118)
+        Me.grp_FTPConsole.Size = New System.Drawing.Size(451, 118)
         Me.grp_FTPConsole.TabIndex = 10
         Me.grp_FTPConsole.Text = "Console"
         '
@@ -228,7 +228,7 @@ Partial Class frm_Main
         Me.txt_Console.Name = "txt_Console"
         Me.txt_Console.ReadOnly = True
         Me.txt_Console.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.txt_Console.Size = New System.Drawing.Size(425, 93)
+        Me.txt_Console.Size = New System.Drawing.Size(447, 93)
         Me.txt_Console.TabIndex = 0
         Me.txt_Console.Text = ""
         Me.txt_Console.WordWrap = False
@@ -301,7 +301,7 @@ Partial Class frm_Main
         Me.btn_StopAlarm.Enabled = False
         Me.btn_StopAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.abort
         Me.btn_StopAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
-        Me.btn_StopAlarm.Location = New System.Drawing.Point(373, 17)
+        Me.btn_StopAlarm.Location = New System.Drawing.Point(395, 17)
         Me.btn_StopAlarm.Name = "btn_StopAlarm"
         Me.btn_StopAlarm.Size = New System.Drawing.Size(68, 63)
         Me.btn_StopAlarm.TabIndex = 3
@@ -312,7 +312,7 @@ Partial Class frm_Main
         Me.btn_SetAlarm.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn_SetAlarm.ImageOptions.Image = Global.Devil7.Automation.FTPAlarm.My.Resources.Resources.alarm
         Me.btn_SetAlarm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter
-        Me.btn_SetAlarm.Location = New System.Drawing.Point(299, 17)
+        Me.btn_SetAlarm.Location = New System.Drawing.Point(321, 17)
         Me.btn_SetAlarm.Name = "btn_SetAlarm"
         Me.btn_SetAlarm.Size = New System.Drawing.Size(68, 63)
         Me.btn_SetAlarm.TabIndex = 3
@@ -331,7 +331,7 @@ Partial Class frm_Main
         Me.grp_Status.Controls.Add(Me.lbl_LastChecked)
         Me.grp_Status.Location = New System.Drawing.Point(12, 86)
         Me.grp_Status.Name = "grp_Status"
-        Me.grp_Status.Size = New System.Drawing.Size(429, 72)
+        Me.grp_Status.Size = New System.Drawing.Size(451, 72)
         Me.grp_Status.TabIndex = 2
         Me.grp_Status.Text = "Status"
         '
@@ -413,7 +413,7 @@ Partial Class frm_Main
         Me.tp_Settings.Controls.Add(Me.grp_Credentials)
         Me.tp_Settings.Controls.Add(Me.grp_General)
         Me.tp_Settings.Name = "tp_Settings"
-        Me.tp_Settings.Size = New System.Drawing.Size(451, 293)
+        Me.tp_Settings.Size = New System.Drawing.Size(473, 293)
         '
         'grp_Ringtone
         '
@@ -424,14 +424,14 @@ Partial Class frm_Main
         Me.grp_Ringtone.Dock = System.Windows.Forms.DockStyle.Top
         Me.grp_Ringtone.Location = New System.Drawing.Point(0, 444)
         Me.grp_Ringtone.Name = "grp_Ringtone"
-        Me.grp_Ringtone.Size = New System.Drawing.Size(451, 75)
+        Me.grp_Ringtone.Size = New System.Drawing.Size(456, 75)
         Me.grp_Ringtone.TabIndex = 3
         Me.grp_Ringtone.Text = "Ringtone"
         '
         'btn_ResetRingtone
         '
         Me.btn_ResetRingtone.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_ResetRingtone.Location = New System.Drawing.Point(274, 47)
+        Me.btn_ResetRingtone.Location = New System.Drawing.Point(279, 47)
         Me.btn_ResetRingtone.Name = "btn_ResetRingtone"
         Me.btn_ResetRingtone.Size = New System.Drawing.Size(94, 23)
         Me.btn_ResetRingtone.TabIndex = 3
@@ -440,7 +440,7 @@ Partial Class frm_Main
         'btn_Play
         '
         Me.btn_Play.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_Play.Location = New System.Drawing.Point(371, 47)
+        Me.btn_Play.Location = New System.Drawing.Point(376, 47)
         Me.btn_Play.Name = "btn_Play"
         Me.btn_Play.Size = New System.Drawing.Size(75, 23)
         Me.btn_Play.TabIndex = 2
@@ -454,7 +454,7 @@ Partial Class frm_Main
         Me.txt_RingTone.Location = New System.Drawing.Point(108, 23)
         Me.txt_RingTone.Name = "txt_RingTone"
         Me.txt_RingTone.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton()})
-        Me.txt_RingTone.Size = New System.Drawing.Size(338, 20)
+        Me.txt_RingTone.Size = New System.Drawing.Size(343, 20)
         Me.txt_RingTone.TabIndex = 1
         '
         'lbl_Ringtone
@@ -475,7 +475,7 @@ Partial Class frm_Main
         Me.grp_Voice.Dock = System.Windows.Forms.DockStyle.Top
         Me.grp_Voice.Location = New System.Drawing.Point(0, 368)
         Me.grp_Voice.Name = "grp_Voice"
-        Me.grp_Voice.Size = New System.Drawing.Size(451, 76)
+        Me.grp_Voice.Size = New System.Drawing.Size(456, 76)
         Me.grp_Voice.TabIndex = 2
         Me.grp_Voice.Text = "Voice Alert"
         '
@@ -499,7 +499,7 @@ Partial Class frm_Main
         'btn_TestVoice
         '
         Me.btn_TestVoice.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_TestVoice.Location = New System.Drawing.Point(371, 23)
+        Me.btn_TestVoice.Location = New System.Drawing.Point(376, 23)
         Me.btn_TestVoice.Name = "btn_TestVoice"
         Me.btn_TestVoice.Size = New System.Drawing.Size(75, 48)
         Me.btn_TestVoice.TabIndex = 2
@@ -520,7 +520,7 @@ Partial Class frm_Main
         Me.cmb_Voice.Location = New System.Drawing.Point(63, 25)
         Me.cmb_Voice.Name = "cmb_Voice"
         Me.cmb_Voice.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
-        Me.cmb_Voice.Size = New System.Drawing.Size(302, 20)
+        Me.cmb_Voice.Size = New System.Drawing.Size(307, 20)
         Me.cmb_Voice.TabIndex = 0
         '
         'grp_Email
@@ -536,7 +536,7 @@ Partial Class frm_Main
         Me.grp_Email.Dock = System.Windows.Forms.DockStyle.Top
         Me.grp_Email.Location = New System.Drawing.Point(0, 266)
         Me.grp_Email.Name = "grp_Email"
-        Me.grp_Email.Size = New System.Drawing.Size(451, 102)
+        Me.grp_Email.Size = New System.Drawing.Size(456, 102)
         Me.grp_Email.TabIndex = 1
         Me.grp_Email.Text = "Email"
         '
@@ -554,7 +554,7 @@ Partial Class frm_Main
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt_EmailMessage.Location = New System.Drawing.Point(63, 78)
         Me.txt_EmailMessage.Name = "txt_EmailMessage"
-        Me.txt_EmailMessage.Size = New System.Drawing.Size(383, 20)
+        Me.txt_EmailMessage.Size = New System.Drawing.Size(388, 20)
         Me.txt_EmailMessage.TabIndex = 6
         '
         'txt_To
@@ -564,7 +564,7 @@ Partial Class frm_Main
         Me.txt_To.EditValue = "someone1@gmail.com;someone2@mail.com"
         Me.txt_To.Location = New System.Drawing.Point(63, 52)
         Me.txt_To.Name = "txt_To"
-        Me.txt_To.Size = New System.Drawing.Size(302, 20)
+        Me.txt_To.Size = New System.Drawing.Size(307, 20)
         Me.txt_To.TabIndex = 5
         '
         'lbl_To
@@ -578,7 +578,7 @@ Partial Class frm_Main
         'lbl_Gmail
         '
         Me.lbl_Gmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lbl_Gmail.Location = New System.Drawing.Point(308, 29)
+        Me.lbl_Gmail.Location = New System.Drawing.Point(313, 29)
         Me.lbl_Gmail.Name = "lbl_Gmail"
         Me.lbl_Gmail.Size = New System.Drawing.Size(57, 13)
         Me.lbl_Gmail.TabIndex = 3
@@ -588,7 +588,7 @@ Partial Class frm_Main
         '
         Me.btn_TestEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btn_TestEmail.Location = New System.Drawing.Point(371, 24)
+        Me.btn_TestEmail.Location = New System.Drawing.Point(376, 24)
         Me.btn_TestEmail.Name = "btn_TestEmail"
         Me.btn_TestEmail.Size = New System.Drawing.Size(75, 42)
         Me.btn_TestEmail.TabIndex = 2
@@ -601,7 +601,7 @@ Partial Class frm_Main
         Me.txt_From.EditValue = "someone"
         Me.txt_From.Location = New System.Drawing.Point(63, 26)
         Me.txt_From.Name = "txt_From"
-        Me.txt_From.Size = New System.Drawing.Size(239, 20)
+        Me.txt_From.Size = New System.Drawing.Size(244, 20)
         Me.txt_From.TabIndex = 1
         '
         'lbl_From
@@ -623,7 +623,7 @@ Partial Class frm_Main
         Me.grp_Notifications.Dock = System.Windows.Forms.DockStyle.Top
         Me.grp_Notifications.Location = New System.Drawing.Point(0, 179)
         Me.grp_Notifications.Name = "grp_Notifications"
-        Me.grp_Notifications.Size = New System.Drawing.Size(451, 87)
+        Me.grp_Notifications.Size = New System.Drawing.Size(456, 87)
         Me.grp_Notifications.TabIndex = 5
         Me.grp_Notifications.Text = "Notifications"
         '
@@ -684,7 +684,7 @@ Partial Class frm_Main
         Me.grp_Credentials.Dock = System.Windows.Forms.DockStyle.Top
         Me.grp_Credentials.Location = New System.Drawing.Point(0, 102)
         Me.grp_Credentials.Name = "grp_Credentials"
-        Me.grp_Credentials.Size = New System.Drawing.Size(451, 77)
+        Me.grp_Credentials.Size = New System.Drawing.Size(456, 77)
         Me.grp_Credentials.TabIndex = 0
         Me.grp_Credentials.Text = "FTP Server"
         '
@@ -700,7 +700,7 @@ Partial Class frm_Main
         Me.table_FTPMain.Name = "table_FTPMain"
         Me.table_FTPMain.RowCount = 1
         Me.table_FTPMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.table_FTPMain.Size = New System.Drawing.Size(447, 52)
+        Me.table_FTPMain.Size = New System.Drawing.Size(452, 52)
         Me.table_FTPMain.TabIndex = 0
         '
         'table_FTPSub_2
@@ -716,12 +716,12 @@ Partial Class frm_Main
         Me.table_FTPSub_2.Controls.Add(Me.txt_Username, 2, 0)
         Me.table_FTPSub_2.Controls.Add(Me.txt_Password, 2, 1)
         Me.table_FTPSub_2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.table_FTPSub_2.Location = New System.Drawing.Point(226, 3)
+        Me.table_FTPSub_2.Location = New System.Drawing.Point(229, 3)
         Me.table_FTPSub_2.Name = "table_FTPSub_2"
         Me.table_FTPSub_2.RowCount = 2
         Me.table_FTPSub_2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.table_FTPSub_2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.table_FTPSub_2.Size = New System.Drawing.Size(218, 46)
+        Me.table_FTPSub_2.Size = New System.Drawing.Size(220, 46)
         Me.table_FTPSub_2.TabIndex = 1
         '
         'lbl_Username
@@ -761,7 +761,7 @@ Partial Class frm_Main
         Me.txt_Username.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txt_Username.Location = New System.Drawing.Point(65, 3)
         Me.txt_Username.Name = "txt_Username"
-        Me.txt_Username.Size = New System.Drawing.Size(150, 20)
+        Me.txt_Username.Size = New System.Drawing.Size(152, 20)
         Me.txt_Username.TabIndex = 3
         '
         'txt_Password
@@ -770,7 +770,7 @@ Partial Class frm_Main
         Me.txt_Password.Location = New System.Drawing.Point(65, 26)
         Me.txt_Password.Name = "txt_Password"
         Me.txt_Password.Properties.UseSystemPasswordChar = True
-        Me.txt_Password.Size = New System.Drawing.Size(150, 20)
+        Me.txt_Password.Size = New System.Drawing.Size(152, 20)
         Me.txt_Password.TabIndex = 3
         '
         'table_FTPSub_1
@@ -791,7 +791,7 @@ Partial Class frm_Main
         Me.table_FTPSub_1.RowCount = 2
         Me.table_FTPSub_1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.table_FTPSub_1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.table_FTPSub_1.Size = New System.Drawing.Size(217, 46)
+        Me.table_FTPSub_1.Size = New System.Drawing.Size(220, 46)
         Me.table_FTPSub_1.TabIndex = 0
         '
         'lbl_FTPServer
@@ -832,7 +832,7 @@ Partial Class frm_Main
         Me.txt_FTPServer.EditValue = "127.0.0.1"
         Me.txt_FTPServer.Location = New System.Drawing.Point(100, 3)
         Me.txt_FTPServer.Name = "txt_FTPServer"
-        Me.txt_FTPServer.Size = New System.Drawing.Size(114, 20)
+        Me.txt_FTPServer.Size = New System.Drawing.Size(117, 20)
         Me.txt_FTPServer.TabIndex = 3
         '
         'txt_Port
@@ -841,7 +841,7 @@ Partial Class frm_Main
         Me.txt_Port.EditValue = "21"
         Me.txt_Port.Location = New System.Drawing.Point(100, 26)
         Me.txt_Port.Name = "txt_Port"
-        Me.txt_Port.Size = New System.Drawing.Size(114, 20)
+        Me.txt_Port.Size = New System.Drawing.Size(117, 20)
         Me.txt_Port.TabIndex = 4
         '
         'grp_General
@@ -857,7 +857,7 @@ Partial Class frm_Main
         Me.grp_General.Dock = System.Windows.Forms.DockStyle.Top
         Me.grp_General.Location = New System.Drawing.Point(0, 0)
         Me.grp_General.Name = "grp_General"
-        Me.grp_General.Size = New System.Drawing.Size(451, 102)
+        Me.grp_General.Size = New System.Drawing.Size(456, 102)
         Me.grp_General.TabIndex = 6
         Me.grp_General.Text = "General"
         '
@@ -880,7 +880,7 @@ Partial Class frm_Main
         '
         'btn_Feedback
         '
-        Me.btn_Feedback.Location = New System.Drawing.Point(343, 48)
+        Me.btn_Feedback.Location = New System.Drawing.Point(365, 48)
         Me.btn_Feedback.Name = "btn_Feedback"
         Me.btn_Feedback.Size = New System.Drawing.Size(83, 45)
         Me.btn_Feedback.TabIndex = 4
@@ -889,7 +889,7 @@ Partial Class frm_Main
         'lbl_LogFolder
         '
         Me.lbl_LogFolder.AutoSize = True
-        Me.lbl_LogFolder.Location = New System.Drawing.Point(340, 28)
+        Me.lbl_LogFolder.Location = New System.Drawing.Point(362, 28)
         Me.lbl_LogFolder.Name = "lbl_LogFolder"
         Me.lbl_LogFolder.Size = New System.Drawing.Size(86, 13)
         Me.lbl_LogFolder.TabIndex = 3
@@ -936,7 +936,7 @@ Partial Class frm_Main
         Me.tp_About.Caption = "About"
         Me.tp_About.Controls.Add(Me.About)
         Me.tp_About.Name = "tp_About"
-        Me.tp_About.Size = New System.Drawing.Size(451, 293)
+        Me.tp_About.Size = New System.Drawing.Size(473, 293)
         '
         'About
         '
@@ -944,7 +944,7 @@ Partial Class frm_Main
         Me.About.Location = New System.Drawing.Point(0, 0)
         Me.About.MinimumSize = New System.Drawing.Size(399, 508)
         Me.About.Name = "About"
-        Me.About.Size = New System.Drawing.Size(451, 508)
+        Me.About.Size = New System.Drawing.Size(456, 508)
         Me.About.TabIndex = 0
         '
         'Timer_Tick
@@ -978,7 +978,7 @@ Partial Class frm_Main
         'frm_Main
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(451, 322)
+        Me.ClientSize = New System.Drawing.Size(473, 322)
         Me.Controls.Add(Me.MainPane)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.IconOptions.Icon = CType(resources.GetObject("frm_Main.IconOptions.Icon"), System.Drawing.Icon)
