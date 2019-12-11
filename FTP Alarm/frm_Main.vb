@@ -30,6 +30,7 @@ Imports Google.Apis.Services
 Imports System.IO
 Imports System.Threading
 Imports System.Net.Mail
+Imports DevExpress.Skins
 
 Public Class frm_Main
 
@@ -656,6 +657,34 @@ WriteLog:
             cmb_Voice.Properties.Items.AddRange(Voices)
             cmb_Voice.SelectedItem = Voices(0)
         End If
+
+        DevExpress.UserSkins.BonusSkins.Register()
+        For Each cnt As SkinContainer In SkinManager.Default.Skins
+            If Not cnt.SkinName.Contains("DevExpress") Then
+                cmb_Theme.Properties.Items.Add(cnt.SkinName)
+            Else
+                Select Case cnt.SkinName
+                    Case "DevExpress Style"
+                        cmb_Theme.Properties.Items.Add("Default Skin")
+                    Case "DevExpress Dark Style"
+                        cmb_Theme.Properties.Items.Add("Default Dark Skin")
+                End Select
+            End If
+        Next cnt
+        If My.Settings.Skin <> "" Then
+            Dim skinName As String = My.Settings.Skin
+            Select Case skinName
+                Case "Default Skin"
+                    skinName = "DevExpress Style"
+                Case "Default Dark Skin"
+                    skinName = "DevExpress Dark Style"
+            End Select
+            cmb_Theme.SelectedIndex = cmb_Theme.Properties.Items.IndexOf(skinName)
+        End If
+        If cmb_Theme.SelectedIndex = -1 AndAlso cmb_Theme.Properties.Items.Count > 0 Then
+            cmb_Theme.SelectedIndex = 0
+        End If
+
         LoadSettings()
     End Sub
 
@@ -685,4 +714,18 @@ WriteLog:
         Me.BringToFront()
         Me.Focus()
     End Sub
+
+    Private Sub cmb_Theme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_Theme.SelectedIndexChanged
+        Dim comboBox As DevExpress.XtraEditors.ComboBoxEdit = TryCast(sender, DevExpress.XtraEditors.ComboBoxEdit)
+        Dim skinName As String = comboBox.Text
+        Select Case skinName
+            Case "Default Skin"
+                skinName = "DevExpress Style"
+            Case "Default Dark Skin"
+                skinName = "DevExpress Dark Style"
+        End Select
+        DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = skinName
+        My.Settings.Skin = skinName
+    End Sub
+
 End Class

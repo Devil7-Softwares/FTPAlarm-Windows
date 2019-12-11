@@ -32,6 +32,7 @@ Public Class frm_Splash
     End Enum
 
     Private Sub Splash_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        DevExpress.UserSkins.BonusSkins.Register()
         If My.Settings.Skin <> "" Then
             Try
                 Me.Theme.LookAndFeel.SkinName = My.Settings.Skin
