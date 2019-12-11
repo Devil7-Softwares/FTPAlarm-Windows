@@ -688,8 +688,14 @@ WriteLog:
             End Select
             cmb_Theme.SelectedIndex = cmb_Theme.Properties.Items.IndexOf(skinName)
         End If
-        If cmb_Theme.SelectedIndex = -1 AndAlso cmb_Theme.Properties.Items.Count > 0 Then
-            cmb_Theme.SelectedIndex = 0
+        If cmb_Theme.SelectedIndex = -1 Then
+            If cmb_Theme.Properties.Items.Count > 0 Then
+                If cmb_Theme.Properties.Items.Contains("Basic") Then
+                    cmb_Theme.SelectedIndex = cmb_Theme.Properties.Items.IndexOf("Basic")
+                Else
+                    cmb_Theme.SelectedIndex = 0
+                End If
+            End If
         End If
 
         LoadSettings()
