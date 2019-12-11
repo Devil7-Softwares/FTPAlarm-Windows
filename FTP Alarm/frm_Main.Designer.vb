@@ -914,7 +914,7 @@ Partial Class frm_Main
         Me.tp_About.Caption = "About"
         Me.tp_About.Controls.Add(Me.About)
         Me.tp_About.Name = "tp_About"
-        Me.tp_About.Size = New System.Drawing.Size(451, 295)
+        Me.tp_About.Size = New System.Drawing.Size(451, 293)
         '
         'About
         '
@@ -922,7 +922,7 @@ Partial Class frm_Main
         Me.About.Location = New System.Drawing.Point(0, 0)
         Me.About.MinimumSize = New System.Drawing.Size(399, 508)
         Me.About.Name = "About"
-        Me.About.Size = New System.Drawing.Size(451, 508)
+        Me.About.Size = New System.Drawing.Size(434, 508)
         Me.About.TabIndex = 0
         '
         'Timer_Tick
@@ -962,6 +962,7 @@ Partial Class frm_Main
         Me.IconOptions.Icon = CType(resources.GetObject("frm_Main.IconOptions.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frm_Main"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Devil7 - FTP Alarm"
         CType(Me.MainPane, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MainPane.ResumeLayout(False)
