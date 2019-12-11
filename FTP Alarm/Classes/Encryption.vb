@@ -82,55 +82,57 @@ Public Class Encryption
     'Decrypt Function: 
     Public Shared Function Decrypt(ByVal cipherText As String) As String
         Dim strReturn As String = String.Empty
-        Try
-            Dim initVectorBytes As Byte()
-            initVectorBytes = System.Text.Encoding.ASCII.GetBytes(m_strInitVector)
+        If Not String.IsNullOrEmpty(cipherText) Then
+            Try
+                Dim initVectorBytes As Byte()
+                initVectorBytes = System.Text.Encoding.ASCII.GetBytes(m_strInitVector)
 
-            Dim saltValueBytes As Byte()
-            saltValueBytes = System.Text.Encoding.ASCII.GetBytes(m_strSaltValue)
+                Dim saltValueBytes As Byte()
+                saltValueBytes = System.Text.Encoding.ASCII.GetBytes(m_strSaltValue)
 
-            Dim cipherTextBytes As Byte()
-            cipherTextBytes = Convert.FromBase64String(cipherText)
+                Dim cipherTextBytes As Byte()
+                cipherTextBytes = Convert.FromBase64String(cipherText)
 
-            Dim mkey As New Rfc2898DeriveBytes(PassPhrase,
+                Dim mkey As New Rfc2898DeriveBytes(PassPhrase,
                                             saltValueBytes,
                                             m_strIterations)
 
-            Dim keyBytes As Byte()
-            Dim intKeySize As Integer
-            intKeySize = CType((m_intKeySize / 8), Integer)
-            keyBytes = mkey.GetBytes(intKeySize)
+                Dim keyBytes As Byte()
+                Dim intKeySize As Integer
+                intKeySize = CType((m_intKeySize / 8), Integer)
+                keyBytes = mkey.GetBytes(intKeySize)
 
-            Dim symmetricKey As New Security.Cryptography.RijndaelManaged
-            symmetricKey.Mode = Security.Cryptography.CipherMode.CBC
+                Dim symmetricKey As New Security.Cryptography.RijndaelManaged
+                symmetricKey.Mode = Security.Cryptography.CipherMode.CBC
 
-            Dim decryptor As Security.Cryptography.ICryptoTransform
-            decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes)
+                Dim decryptor As Security.Cryptography.ICryptoTransform
+                decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes)
 
-            Dim memoryStream As IO.MemoryStream
-            memoryStream = New IO.MemoryStream(cipherTextBytes)
+                Dim memoryStream As IO.MemoryStream
+                memoryStream = New IO.MemoryStream(cipherTextBytes)
 
-            Dim cryptoStream As New Security.Cryptography.CryptoStream(memoryStream,
+                Dim cryptoStream As New Security.Cryptography.CryptoStream(memoryStream,
                                             decryptor,
                                              Security.Cryptography.CryptoStreamMode.Read)
 
-            Dim plainTextBytes As Byte()
-            ReDim plainTextBytes(cipherTextBytes.Length)
+                Dim plainTextBytes As Byte()
+                ReDim plainTextBytes(cipherTextBytes.Length)
 
-            Dim decryptedByteCount As Integer
-            decryptedByteCount = cryptoStream.Read(plainTextBytes,
+                Dim decryptedByteCount As Integer
+                decryptedByteCount = cryptoStream.Read(plainTextBytes,
                                                 0,
                                                 plainTextBytes.Length)
-            memoryStream.Close()
-            cryptoStream.Close()
+                memoryStream.Close()
+                cryptoStream.Close()
 
-            Dim plainText As String = System.Text.Encoding.UTF8.GetString(plainTextBytes,
+                Dim plainText As String = System.Text.Encoding.UTF8.GetString(plainTextBytes,
                                                 0,
                                                 decryptedByteCount)
-            strReturn = plainText
-        Catch ex As Exception
-            strReturn = Nothing
-        End Try
+                strReturn = plainText
+            Catch ex As Exception
+                strReturn = Nothing
+            End Try
+        End If
         Return strReturn
     End Function
 #End Region
